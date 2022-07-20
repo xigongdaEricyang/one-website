@@ -16,6 +16,7 @@ magic-api:
   # resource.location: /Users/rivery/Desktop/projects/new-website/magic-scripts
   resource.location: /opt/metadata/magic-api
   show-url: false
+  show-sql: true #配置打印SQL
   page:
     size: pageSize # 页大小的请求参数名称 缺省时为size
     page: page # 页码的请求参数名称 缺省时为page
