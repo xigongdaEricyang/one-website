@@ -14,4 +14,4 @@ RUN apk --update add --no-cache fontconfig ttf-dejavu
 COPY --from=build /home/app/target/one-website-0.0.1-SNAPSHOT.jar /usr/local/lib/one-website.jar
 COPY src/main/resources/application.yml /usr/local/lib/application.yml
 EXPOSE 8080
-ENTRYPOINT ["java","-jar", "/usr/local/lib/one-website.jar.jar","--spring.config.location=/usr/local/lib/application.yaml"]
+ENTRYPOINT ["java","-jar", "/usr/local/lib/one-website.jar","--spring.config.location=/usr/local/lib/application.yml"]

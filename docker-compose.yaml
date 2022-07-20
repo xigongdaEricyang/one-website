@@ -1,0 +1,11 @@
+version: "3"
+services:
+  onewebsite:
+    restart: always
+    build: .
+    volumes:
+      - ./src/main/resources/application.yml:/usr/local/lib/application.yml
+    ports:
+      - 8080:8080
+    
+

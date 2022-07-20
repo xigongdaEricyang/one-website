@@ -1,0 +1,43 @@
+.blogModal__uloOC .ant-modal-body {
+  min-height: 50vh;
+  overflow: auto;
+}
+
+.actions__j0qTe {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.content__CstDw {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.pic__Sii_j {
+  max-width: 100px;
+}
+.action__yEw5I {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.actionItem__uIjHa {
+  width: 24px;
+  color: #2196f3;
+}
+.actionItem__uIjHa:hover {
+  cursor: pointer;
+  color: #4372FF;
+}
+
+.cover__ibp9u {
+  width: 100px;
+}
+
+.blogManagement__ER15f {
+  margin: 24px;
+}
+
