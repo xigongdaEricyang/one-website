@@ -5,14 +5,16 @@ erupt-app:
 erupt:
   csrfInspect: true
   redisSession: false
-  uploadPath: /Users/rivery/Desktop/projects/new-website/attachments
+  uploadPath: /opt/erupt-attachment
+  # uploadPath: /Users/rivery/Desktop/projects/new-website/attachments
   keepUploadFileName: false
   upms.expireTimeByLogin: 60
   job.enable: true
   security.recordOperateLog: true
 magic-api:
   web: /magic/web
-  resource.location: /Users/rivery/Desktop/projects/new-website/magic-scripts
+  # resource.location: /Users/rivery/Desktop/projects/new-website/magic-scripts
+  resource.location: /opt/metadata/magic-api
   show-url: false
   page:
     size: pageSize # 页大小的请求参数名称 缺省时为size

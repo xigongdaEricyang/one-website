@@ -5,7 +5,8 @@ services:
     build: .
     volumes:
       - ./src/main/resources/application.yml:/usr/local/lib/application.yml
-      - ./magic-scripts:/usr/local/lib/magic-scripts
+      - ./magic-scripts:/opt/metadata/magic-api
+      - ./attachments:/opt/erupt-attachment
     ports:
       - 8080:8080
     
