@@ -5,6 +5,7 @@ services:
     build: .
     volumes:
       - ./src/main/resources/application.yml:/usr/local/lib/application.yml
+      - ./magic-scripts:/usr/local/lib/magic-scripts
     ports:
       - 8080:8080
     
