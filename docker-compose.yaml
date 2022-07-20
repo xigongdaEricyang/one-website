@@ -1,5 +1,13 @@
 version: "3"
 services:
+  proxy:
+    restart: always
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/nginx.default.conf:/etc/nginx/conf.d/default.conf
+      - ./logs/nginx:/var/log/nginx
   onewebsite:
     restart: always
     build: .
