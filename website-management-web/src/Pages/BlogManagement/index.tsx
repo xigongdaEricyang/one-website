@@ -92,7 +92,7 @@ const BlogManagement = () => {
         dataIndex: 'publish',
         width: 100,
         render: (publish) => (
-          <Tag color={publish === '发布' ? 'green' : 'red'}>{publish}</Tag>
+          <Tag color={publish === '发布' || publish === 'publish' ? 'green' : 'red'}>{publish}</Tag>
         )
       },
       {

@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @EruptTpl(engine = Tpl.Engine.Velocity)
-public class WebsiteAction {
-    @TplAction(value = "websiteBlog", path = "/tpl/website.vm")
+public class ENWebsiteAction {
+    @TplAction(value = "en_websiteBlog", path = "/tpl/website.vm")
     public Map<String, String> velocity() {
         Map<String, String> map = new HashMap<>();
-        map.put("title", "官网后台");
-        map.put("language", "zh_CN");
+        map.put("title", "website_platform");
+        map.put("language", "en_US");
         return map;
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Tabs } from 'antd';
 
 import BlogManagement from '@/Pages/BlogManagement';
@@ -8,6 +8,11 @@ import styles from './index.module.less';
 const { TabPane } = Tabs;
 
 const App = () => {
+
+  useEffect(() => {
+    console.log('zzz', document.querySelector('html')?.lang)
+  })
+
   return (
     <div className={styles.blogManagement}>
       <Tabs>

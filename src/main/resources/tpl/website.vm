@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh_cn">
+<html lang="$language">
 
 <head>
   <meta charset="UTF-8">
@@ -10,12 +10,14 @@
   <title>
     $title
   </title>
+## need to replace
   <link rel="icon" href="/web/favicon.ico">
   <script defer="defer" src="/web/1.0.0/runtime.js"></script>
   <script defer="defer" src="/web/1.0.0/vendors.js"></script>
   <script defer="defer" src="/web/1.0.0/dashboard.js"></script>
   <link href="/web/1.0.0/vendors.css" rel="stylesheet">
   <link href="/web/1.0.0/dashboard.css" rel="stylesheet">
+##  <script defer="defer" src="http://localhost:7000/dashboard.js"></script>
 </head>
 
 <body>

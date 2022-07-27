@@ -1,17 +1,20 @@
 import axios from 'axios';
+import { curLanguage, Language } from '@/utils';
 
 export const DEFAULT_PAGE_SIZE = 10;
 
+const entity = curLanguage === Language.ZH_CN ? 'Blog' : 'BlogEN';
+
 export const asyncCreateBlog = async (data) => {
   const res = await axios.post(
-    `/erupt-api/data/modify/Blog`,
+    `/erupt-api/data/modify/${entity}`,
     {
       ...data,
     },
     {
       headers: {
         token: (parent as any).getAppToken().token,
-        erupt: 'Blog'
+        erupt: entity
       },
     });
 
@@ -20,14 +23,14 @@ export const asyncCreateBlog = async (data) => {
 
 export const asyncEditBlog = async (data) => {
   const res = await axios.put(
-    `/erupt-api/data/modify/Blog`,
+    `/erupt-api/data/modify/${entity}`,
     {
       ...data,
     },
     {
       headers: {
         token: (parent as any).getAppToken().token,
-        erupt: 'Blog'
+        erupt: entity
       },
     });
 
@@ -36,7 +39,7 @@ export const asyncEditBlog = async (data) => {
 
 export const asyncFetchBlogs = async (pageIndex: number) => {
   const res = await axios.post(
-    `/erupt-api/data/table/Blog`,
+    `/erupt-api/data/table/${entity}`,
     {
       pageIndex,
       pageSize: DEFAULT_PAGE_SIZE,
@@ -45,7 +48,7 @@ export const asyncFetchBlogs = async (pageIndex: number) => {
     {
       headers: {
         token: (parent as any).getAppToken().token,
-        erupt: 'Blog'
+        erupt: entity
       },
     });
   if (res.status === 200) {
@@ -59,11 +62,11 @@ export const asyncFetchBlogs = async (pageIndex: number) => {
 
 export const asyncDeleteBlogById = async (id: number) => {
   const res = await axios.delete(
-    `/erupt-api/data/modify/Blog/${id}`,
+    `/erupt-api/data/modify/${entity}/${id}`,
     {
       headers: {
         token: (parent as any).getAppToken().token,
-        erupt: 'Blog'
+        erupt: entity
       },
     });
 

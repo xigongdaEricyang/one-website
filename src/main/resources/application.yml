@@ -5,18 +5,38 @@ erupt-app:
 erupt:
   csrfInspect: true
   redisSession: false
+# need to replace
   uploadPath: /opt/erupt-attachment
   # uploadPath: /Users/rivery/Desktop/projects/new-website/attachments
   keepUploadFileName: false
   upms.expireTimeByLogin: 60
   job.enable: true
   security.recordOperateLog: true
+  dbs:
+    - datasource:
+        name: english_datasource
+        url: jdbc:mysql://192.168.8.157:3306/website?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York
+        username: root
+        password: nebula
+# need to replace datasource
+      jpa:
+        show-sql: true
+        generate-ddl: true
+        open-in-view: true
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: mysql
+      scanPackages: com.vesoft.onewebsite.en.model
 magic-api:
   web: /magic/web
+# need to replace
   # resource.location: /Users/rivery/Desktop/projects/new-website/magic-scripts
   resource.location: /opt/metadata/magic-api
   show-url: false
   show-sql: true #配置打印SQL
+  response-code:
+    success: 0 #执行成功的code值
+    invalid: 1 #参数验证未通过的code值
+    exception: -1 #执行出现异常的code值
   page:
     size: pageSize # 页大小的请求参数名称 缺省时为size
     page: page # 页码的请求参数名称 缺省时为page
@@ -27,6 +47,7 @@ spring:
     url: jdbc:mysql://192.168.8.44:3306/website?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: nebula
+# need to replace datasource
   jpa:
     show-sql: true
     generate-ddl: true

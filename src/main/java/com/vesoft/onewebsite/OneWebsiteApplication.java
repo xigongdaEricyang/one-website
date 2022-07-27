@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import xyz.erupt.core.annotation.EruptScan;
 
 @SpringBootApplication
-@EntityScan
+@EntityScan({"com.vesoft.onewebsite.model"})
 @EruptScan
 public class OneWebsiteApplication {
 
