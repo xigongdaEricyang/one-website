@@ -29,13 +29,13 @@ public class DictionaryEN extends HyperModel {
             views = @View(title = "Key"),
             edit = @Edit(title = "Key", notNull = true, search = @Search(vague = true))
     )
-    private String dictKey;
+    private String dict_key;
 
     @EruptField(
             views = @View(title = "Value", type=ViewType.CODE),
             edit = @Edit(title = "Value", notNull = true, type= EditType.CODE_EDITOR)
     )
-    private String dictValue;
+    private String dict_value;
 
     @EruptField(
             views = @View(title = "备注", type=ViewType.TEXT),
