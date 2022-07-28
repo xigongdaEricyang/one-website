@@ -1,6 +1,7 @@
 package com.vesoft.onewebsite.en.model.base;
 
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import xyz.erupt.annotation.PreDataProxy;
@@ -10,15 +11,17 @@ import xyz.erupt.annotation.config.EruptSmartSkipSerialize;
 @PreDataProxy(ENHyperDataProxy.class)
 public class HyperModel extends BaseModel {
     @EruptSmartSkipSerialize
+    @Column(name="create_time")
     private Date createTime;
     @EruptSmartSkipSerialize
+    @Column(name = "update_time")
     private Date updateTime;
     @ManyToOne
     @EruptSmartSkipSerialize
-    private EruptUserVo createUser;
+    private EruptUserVo create_user;
     @ManyToOne
     @EruptSmartSkipSerialize
-    private EruptUserVo updateUser;
+    private EruptUserVo update_user;
 
     public HyperModel() {
     }
@@ -32,11 +35,11 @@ public class HyperModel extends BaseModel {
     }
 
     public EruptUserVo getCreateUser() {
-        return this.createUser;
+        return this.create_user;
     }
 
     public EruptUserVo getUpdateUser() {
-        return this.updateUser;
+        return this.update_user;
     }
 
     public void setCreateTime(final Date createTime) {
@@ -48,10 +51,10 @@ public class HyperModel extends BaseModel {
     }
 
     public void setCreateUser(final EruptUserVo createUser) {
-        this.createUser = createUser;
+        this.create_user = createUser;
     }
 
     public void setUpdateUser(final EruptUserVo updateUser) {
-        this.updateUser = updateUser;
+        this.update_user = updateUser;
     }
 }

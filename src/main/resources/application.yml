@@ -14,11 +14,11 @@ erupt:
   security.recordOperateLog: true
   dbs:
     - datasource:
+        # need to replace datasource
         name: english_datasource
         url: jdbc:mysql://192.168.8.157:3306/website?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York
         username: root
         password: nebula
-# need to replace datasource
       jpa:
         show-sql: true
         generate-ddl: true

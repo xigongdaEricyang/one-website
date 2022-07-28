@@ -71,15 +71,18 @@ public class Blog extends HyperModel {
             views = @View(title = "内容", type = ViewType.TEXT, export = false),
             edit = @Edit(title = "内容编辑", type = EditType.TEXTAREA,notNull = true)
     )
+    @Column(columnDefinition = "LONGTEXT NOT NULL")
     private String content;
 
     @EruptField(
             views = @View(title = "创建时间", type = ViewType.DATE_TIME, export = false)
     )
+    @Column(name = "create_time")
     private Date createTime;
 
     @EruptField(
             views = @View(title = "更新时间", type = ViewType.DATE_TIME, export = false)
     )
+    @Column(name = "update_time")
     private Date updateTime;
 }

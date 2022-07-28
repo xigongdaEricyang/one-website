@@ -64,6 +64,7 @@ public class ProductEN extends HyperModel {
             views = @View(title = "特性概要详情", type=ViewType.TEXT),
             edit = @Edit(title = "特性概要详情", search = @Search(vague = true), type = EditType.TEXTAREA)
     )
+    @Column(columnDefinition = "LONGTEXT NOT NULL")
     private String summary_feature;
 
     @EruptField(

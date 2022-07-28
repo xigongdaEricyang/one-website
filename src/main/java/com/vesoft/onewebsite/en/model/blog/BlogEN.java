@@ -6,7 +6,6 @@ import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Power;
-import xyz.erupt.annotation.sub_erupt.Tpl;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -16,7 +15,6 @@ import xyz.erupt.core.annotation.EruptDataSource;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
 @EruptDataSource("english_datasource")
@@ -73,6 +71,7 @@ public class BlogEN extends HyperModel {
             views = @View(title = "content", type = ViewType.TEXT, export = false),
             edit = @Edit(title = "Content Edit", type = EditType.TEXTAREA,notNull = true)
     )
+    @Column(columnDefinition = "LONGTEXT NOT NULL")
     private String content;
 
     @EruptField(
