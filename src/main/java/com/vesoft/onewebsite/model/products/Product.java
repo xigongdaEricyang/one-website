@@ -38,6 +38,12 @@ public class Product extends HyperModel {
     private String description;
 
     @EruptField(
+            views = @View(title = "主图", type= ViewType.IMAGE),
+            edit = @Edit(title = "主图", notNull = true, type = EditType.INPUT)
+    )
+    private String main_pic;
+
+    @EruptField(
         views = @View(title = "产品类型"),
         edit = @Edit(title = "产品类型", type = EditType.CHOICE,
         choiceType = @ChoiceType(
@@ -86,6 +92,20 @@ public class Product extends HyperModel {
             edit = @Edit(title = "优势", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
     )
     private Set<Advantage> advantages;
+
+    @EruptField(
+            views = @View(title = "使用原因子标题"),
+            edit = @Edit(title = "使用原因子标题", notNull = true)
+    )
+    private String reason_subtitle;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="product_id")
+    @EruptField(
+            views = @View(title = "使用原因"),
+            edit = @Edit(title = "使用原因", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
+    )
+    private Set<Reason> reasons;
 
     @EruptField(
             views = @View(title = "视频url"),
