@@ -41,6 +41,12 @@ public class Blog extends HyperModel {
     private String title;
 
     @EruptField(
+            views = @View(title = "Slug"),
+            edit = @Edit(title = "Slug", notNull = true, search = @Search(vague = true))
+    )
+    private String slug;
+
+    @EruptField(
             views = @View(title = "作者"),
             edit = @Edit(title = "作者", notNull = true, search = @Search(vague = true))
     )

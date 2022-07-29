@@ -5,23 +5,24 @@ import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.ViewType;
-import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.TagsType;
-import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.core.annotation.EruptDataSource;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
 @Erupt(name = "官网产品版本功能对比",
-        power = @Power(importable = true, export = true)
+        power = @Power(importable = true, export = true),
+        linkTree = @LinkTree(field = "product_category")
 )
 @Entity
 @Table(name = "website_product_version")
@@ -34,21 +35,28 @@ public class VersionCompareEN extends HyperModel {
     )
     private String function_type;
 
-    @EruptField(
-            views = @View(title = "产品类型"),
-            edit = @Edit(title = "产品类型", type = EditType.CHOICE,
-                    choiceType = @ChoiceType(
-                            vl = {
-                                    @VL(label = "Nebula Graph", value = "nebulagraph"),
-                                    @VL(label = "Explorer", value = "explorer"),
-                                    @VL(label = "Dashboard", value = "dashboard"),
-                                    @VL(label = "Studio", value = "studio"),
-                                    @VL(label = "Cloud", value = "cloud"),
-                            }
-                    ), search = @Search(vague = true))
+//    @EruptField(
+//            views = @View(title = "产品类型"),
+//            edit = @Edit(title = "产品类型", type = EditType.CHOICE,
+//                    choiceType = @ChoiceType(
+//                            vl = {
+//                                    @VL(label = "Nebula Graph", value = "nebulagraph"),
+//                                    @VL(label = "Explorer", value = "explorer"),
+//                                    @VL(label = "Dashboard", value = "dashboard"),
+//                                    @VL(label = "Studio", value = "studio"),
+//                                    @VL(label = "Cloud", value = "cloud"),
+//                            }
+//                    ), search = @Search(vague = true))
+//
+//    )
+//    private String product_type;
 
+    @ManyToOne
+    @EruptField(
+            views = @View(title = "产品类型", column = "name"),
+            edit = @Edit(title = "产品类型", notNull = true, type = EditType.REFERENCE_TREE)
     )
-    private String product_type;
+    private ProductCategoryEN product_category;
 
 
     @EruptField(
@@ -60,7 +68,7 @@ public class VersionCompareEN extends HyperModel {
     @EruptField(
             views = @View(title = "版本情况"),
             edit = @Edit(title = "版本情况", notNull = true, type=EditType.TAGS, tagsType = @TagsType(
-                    tags={"enterprise", "community"}
+                    tags={"enterprise", "community", "ent_comming_soon", "com_comming_soon"}
             ), search = @Search)
     )
     private String version;
