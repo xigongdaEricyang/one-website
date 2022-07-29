@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
@@ -19,7 +20,8 @@ import java.util.Set;
 
 @EruptDataSource("english_datasource")
 @Erupt(name = "官网博客文章_英文",
-        power = @Power(importable = true, export = true)
+        power = @Power(importable = true, export = true),
+        linkTree = @LinkTree(field = "blog_category")
 )
 @Entity
 @Table(name = "website_blog")

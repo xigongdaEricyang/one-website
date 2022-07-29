@@ -60,6 +60,12 @@ const BlogManagement = () => {
   const columns = useMemo(() => (
     [
       {
+        key: 'id',
+        title: 'id',
+        dataIndex: 'id',
+        width: '40px'
+      },
+      {
         key: 'pic',
         title: '封面图',
         dataIndex: 'pic',

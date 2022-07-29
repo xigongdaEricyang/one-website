@@ -9,7 +9,7 @@ import java.util.Map;
 
 @EruptTpl(engine = Tpl.Engine.Velocity)
 public class ENWebsiteAction {
-    @TplAction(value = "en_websiteBlog", path = "/tpl/website.vm")
+    @TplAction(value = "websiteBlogEN", path = "/tpl/website.vm")
     public Map<String, String> velocity() {
         Map<String, String> map = new HashMap<>();
         map.put("title", "website_platform");

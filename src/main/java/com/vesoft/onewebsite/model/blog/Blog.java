@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
-import xyz.erupt.annotation.sub_erupt.Tpl;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -15,11 +15,11 @@ import xyz.erupt.upms.model.base.HyperModel;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
 @Erupt(name = "官网博客文章",
-        power = @Power(importable = true, export = true)
+        power = @Power(importable = true, export = true),
+        linkTree = @LinkTree(field = "blog_category")
 )
 @Entity
 @Table(name = "website_blog")
@@ -53,6 +53,13 @@ public class Blog extends HyperModel {
             edit = @Edit(title = "标签", type = EditType.TAB_TABLE_ADD, search = @Search(vague = true))
     )
     private Set<BlogTag> tags;
+
+    @ManyToOne
+    @EruptField(
+            views = @View(title = "分类", column = "name"),
+            edit = @Edit(title = "分类", notNull = true, type = EditType.REFERENCE_TREE)
+    )
+    private BlogCategory blog_category;
 
     @EruptField(
             views = @View(title = "描述"),

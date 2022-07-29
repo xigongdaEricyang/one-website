@@ -118,4 +118,5 @@ public class Product extends HyperModel {
             edit = @Edit(title = "其他信息", type = EditType.CODE_EDITOR)
     )
     private String other;
+
 }
