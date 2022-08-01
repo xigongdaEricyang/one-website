@@ -11,6 +11,8 @@ services:
   onewebsite:
     restart: always
     build: .
+    env_file:
+      - .env
     environment:
       - "MYSQL_CN_URL=${MYSQL_CN_URL}"
       - "MYSQL_CN_USERNAM=${MYSQL_CN_USERNAME}"
