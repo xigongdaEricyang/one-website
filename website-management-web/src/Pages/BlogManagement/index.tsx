@@ -102,6 +102,12 @@ const BlogManagement = () => {
         )
       },
       {
+        key: 'category',
+        title: '文章类型',
+        dataIndex: 'blog_category_name',
+        width: 100,
+      },
+      {
         key: 'content',
         title: '内容',
         dataIndex: 'content',

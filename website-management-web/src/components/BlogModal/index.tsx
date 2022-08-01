@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Form, Input, message, Modal, Radio, Row } from 'antd';
+import { Col, Form, Input, message, Modal, Radio, Row, Select } from 'antd';
 
 import ModalWrapper from '@/components/ModalWrapper';
 import styles from './index.module.less';
 import { useForm } from 'antd/lib/form/Form';
 import MarkdownEditor from '../MarkdownEditor';
-import { asyncCreateBlog, asyncEditBlog } from '@/request';
+import { asyncCreateBlog, asyncEditBlog, asyncFetchBlogById, asyncFetchBlogCategorys, asyncFetchBlogTags } from '@/request';
 
 interface IProps {
   visible?: boolean;
@@ -21,20 +21,42 @@ const TITLE = {
   edit: '编辑博客',
 }
 
+const curInitialValue = {
+  publish: false
+};
+
 const BlogModal: React.FC<IProps> = (props: IProps) => {
   const { onOk, onCancel, hide, visible, data, type } = props;
 
   const [curVisible, setCurVisible] = useState(visible);
 
-  const [curInitialValue, setCurInitialValue] = useState(
-    {
-      ...data,
-      publish: data?.publish === '发布' ? true : false
-    } || {
-    publish: false
-  });
+  const [categorys, setCategorys] = useState([]);
+
+  // const [ blogData, setBlogData ] = useState(data);
+
+  const [tags, setTags] = useState<any>([]);
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    asyncFetchBlogCategorys().then((res: any) => {
+      setCategorys(res.list)
+    });
+    asyncFetchBlogTags().then((res: any) => {
+      setTags(res.list)
+    });
+    if (type === 'add') {
+      return;
+    }
+    asyncFetchBlogById(data.id).then((curData: any) => {
+      // setBlogData(curData)
+      form.setFieldsValue({
+        ...curData,
+        tags: curData.tags.map((item: any) => item.name),
+        publish: curData?.publish === '发布' ? true : false
+      });
+    });
+  }, [])
 
   useEffect(() => {
     if (!curVisible) {
@@ -49,9 +71,16 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
   const handleOkClick = () => {
     form.validateFields().then(async (values) => {
       setLoading(true);
+      const blog_category = categorys.find((item: any) => item.id.toString() === values.blog_category_name);
       const fn = type === 'add' ? asyncCreateBlog : asyncEditBlog;
       const { data: res } = await fn({
         ...values,
+        blog_category,
+        tags: values.tags.map(tag => {
+          const t = tags.find(t => t.name === tag);
+          if (t) return t;
+          return { name: tag }
+        }),
         id: data ? parseInt(data.id) : undefined,
       });
       onOk?.(res);
@@ -156,6 +185,51 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
                 <Radio value={true}>发布</Radio>
                 <Radio value={false}>草稿</Radio>
               </Radio.Group>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24} >
+            <Form.Item labelAlign='left' label="slug(唯一标识，用于SEO)" name="slug"
+              required
+              rules={[
+                {
+                  required: true,
+                  message: 'slug必填',
+                },
+              ]}>
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={7}>
+            <Form.Item label="分类" name="blog_category_name"
+              required
+              rules={[
+                {
+                  required: true,
+                  message: '分类必填',
+                },
+              ]}>
+              <Select>
+                {
+                  categorys.map((cat: any) => (
+                    <Select.Option key={cat.id}>{cat.name}</Select.Option>
+                  ))
+                }
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={10}>
+            <Form.Item label="标签" name="tags">
+              <Select mode="tags">
+                {
+                  tags.map((tag: any) => (
+                    <Select.Option key={tag.name}>{tag.name}</Select.Option>
+                  ))
+                }
+              </Select>
             </Form.Item>
           </Col>
         </Row>

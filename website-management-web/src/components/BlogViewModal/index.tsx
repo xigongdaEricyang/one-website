@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Descriptions, Form, Input, message, Modal, Radio, Row } from 'antd';
+import { Col, Descriptions, Form, Input, message, Modal, Radio, Row, Tag } from 'antd';
 
 import ModalWrapper from '@/components/ModalWrapper';
 import styles from './index.module.less';
 import { useForm } from 'antd/lib/form/Form';
 import MarkdownEditor from '../MarkdownEditor';
+import { asyncFetchBlogById } from '@/request';
 // import { asyncCreateBlog } from '@/request';
 
 interface IProps {
@@ -24,6 +25,15 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
   const [curVisible, setCurVisible] = useState(visible);
 
   const [loading, setLoading] = useState(false);
+
+  const [blogData, setBlogData] = useState(data);
+
+  useEffect(() => {
+    asyncFetchBlogById(data.id).then((curData: any) => {
+      // setBlogData(curData)
+      setBlogData(curData)
+    });
+  }, [])
 
   useEffect(() => {
     if (!curVisible) {
@@ -75,6 +85,19 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
         </Descriptions.Item>
         <Descriptions.Item label="作者">
           {data.author}
+        </Descriptions.Item>
+        <Descriptions.Item label="slug">
+          {data.slug}
+        </Descriptions.Item>
+        <Descriptions.Item label="分类">
+          {data.blog_category_name}
+        </Descriptions.Item>
+        <Descriptions.Item label="标签">
+          {
+            (blogData?.tags || []).map((item: any) => (
+              <Tag title={item.name} color='default'>{item.name}</Tag>
+            ))
+          }
         </Descriptions.Item>
         <Descriptions.Item label="描述">
           {data.description}
