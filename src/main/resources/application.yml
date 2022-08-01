@@ -16,9 +16,9 @@ erupt:
     - datasource:
         # need to replace datasource
         name: english_datasource
-        url: jdbc:mysql://192.168.8.157:3306/website?useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York
-        username: root
-        password: nebula
+        url: ${MYSQL_EN_URL}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=${MYSQL_EN_TZ}
+        username: ${MYSQL_EN_USERNAME}
+        password: ${MYSQL_EN_PASSWORD}
       jpa:
         show-sql: true
         generate-ddl: true
@@ -44,9 +44,10 @@ magic-api:
     default-size: 10 # 自定义为默认页大小 缺省时为10
 spring:
   datasource:
-    url: jdbc:mysql://192.168.8.44:3306/website?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: nebula
+    # url: jdbc:mysql://192.168.8.44:3306/website?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: ${MYSQL_CN_URL}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=${MYSQL_CN_TZ}
+    username: ${MYSQL_CN_USERNAME}
+    password: ${MYSQL_CN_PASSWORD}
 # need to replace datasource
   jpa:
     show-sql: true
