@@ -3,6 +3,8 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const EDITOR_PATH = path.resolve(__dirname, "./node_modules/react-markdown-editor-lite");
+
 const isDevEnv = () => process.env.NODE_ENV === 'development';
 
 const useCssPlugin = () => !isDevEnv();
@@ -42,16 +44,7 @@ const baseConifg: Configuration = {
                     style: true, // or 'css'
                   },
                   'antd',
-                ],
-                [
-                  'import',
-                  {
-                    libraryName: '@vesoft-inc/ui',
-                    style: true,
-                    camel2DashComponentName: false,
-                  },
-                  'vesoft-ui',
-                ],
+                ]
               ],
             },
           },
@@ -60,6 +53,7 @@ const baseConifg: Configuration = {
       },
       {
         test: /\.css$/,
+        include: [EDITOR_PATH],
         use: [
           useCssPlugin() ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
