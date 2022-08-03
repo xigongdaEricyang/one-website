@@ -9,7 +9,7 @@ erupt:
   uploadPath: /opt/erupt-attachment
 #  uploadPath: /Users/rivery/Desktop/projects/new-website/attachments
   keepUploadFileName: false
-  upms.expireTimeByLogin: 60
+  upms.expireTimeByLogin: 600
   job.enable: true
   security.recordOperateLog: true
   dbs:

@@ -18,7 +18,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网通用字典",
+@Erupt(name = "Website Dictionary",
         power = @Power(importable = true, export = true)
 )
 @Entity
@@ -40,8 +40,8 @@ public class DictionaryEN extends HyperModel {
     private String dict_value;
 
     @EruptField(
-            views = @View(title = "备注", type=ViewType.TEXT),
-            edit = @Edit(title = "备注", type= EditType.TEXTAREA, search = @Search(vague = true))
+            views = @View(title = "Remark", type=ViewType.TEXT),
+            edit = @Edit(title = "Remark", type= EditType.TEXTAREA, search = @Search(vague = true))
     )
     private String remark;
 }

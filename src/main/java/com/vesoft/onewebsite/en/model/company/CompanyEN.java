@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网公司信息",
+@Erupt(name = "Website Company Info",
         power = @Power(importable = true, export = true)
 )
 @Entity
@@ -26,32 +26,32 @@ import javax.persistence.Table;
 @Setter
 public class CompanyEN extends HyperModel {
     @EruptField(
-            views = @View(title = "公司LOGO", type= ViewType.IMAGE),
-            edit = @Edit(title = "公司LOGO", notNull = true, type= EditType.INPUT)
+            views = @View(title = "Logo", type= ViewType.IMAGE),
+            edit = @Edit(title = "Logo", notNull = true, type= EditType.INPUT)
     )
     private String logo;
 
     @EruptField(
-            views = @View(title = "名称"),
-            edit = @Edit(title = "名称", search = @Search(vague = true))
+            views = @View(title = "Name"),
+            edit = @Edit(title = "Name", search = @Search(vague = true))
     )
     private String name;
 
     @EruptField(
-            views = @View(title = "简介"),
-            edit = @Edit(title = "简介", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Description"),
+            edit = @Edit(title = "Description", notNull = true, search = @Search(vague = true))
     )
     private String description;
 
     @EruptField(
-            views = @View(title = "文章id", type = ViewType.TEXT),
-            edit = @Edit(title = "文章id", type = EditType.INPUT)
+            views = @View(title = "Slug", type = ViewType.TEXT),
+            edit = @Edit(title = "Slug", type = EditType.INPUT)
     )
-    private String blog_id;
+    private String slug;
 
     @EruptField(
-            views= @View(title = "其他信息", type = ViewType.CODE),
-            edit = @Edit(title = "其他信息", type = EditType.CODE_EDITOR)
+            views= @View(title = "Other", type = ViewType.CODE),
+            edit = @Edit(title = "Other", type = EditType.CODE_EDITOR)
     )
     private String other;
 }

@@ -44,10 +44,10 @@ public class Company extends HyperModel {
     private String description;
 
     @EruptField(
-            views = @View(title = "文章id", type = ViewType.TEXT),
-            edit = @Edit(title = "文章id", type = EditType.INPUT)
+            views = @View(title = "文章Slug", type = ViewType.TEXT),
+            edit = @Edit(title = "文章Slug", type = EditType.INPUT)
     )
-    private String blog_id;
+    private String blog_slug;
 
     @EruptField(
             views= @View(title = "其他信息", type = ViewType.CODE),

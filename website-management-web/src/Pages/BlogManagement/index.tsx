@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, message, Popconfirm, Table, Tag } from 'antd';
+import { Button, Col, Form, Input, message, Popconfirm, Row, Select, Table, Tag } from 'antd';
 
 import BlogModal from '@/components/BlogModal';
-import { asyncDeleteBlogById, asyncFetchBlogs, DEFAULT_PAGE_SIZE } from '@/request';
+import { asyncDeleteBlogById, asyncFetchBlogCategorys, asyncFetchBlogs, asyncFetchBlogTags, asyncSearchBlogList, DEFAULT_PAGE_SIZE } from '@/request';
 
 import styles from './index.module.less';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import BlogViewModal from '@/components/BlogViewModal';
+import { useForm } from 'antd/lib/form/Form';
 
 
 const BlogManagement = () => {
@@ -14,6 +15,22 @@ const BlogManagement = () => {
   const [blogs, setBlogs] = useState([]);
   const [total, setTotal] = useState(0);
   const [curPage, setCurPage] = useState(1);
+
+  const [form] = useForm();
+
+  const [categorys, setCategorys] = useState([]);
+
+  const [tags, setTags] = useState<any>([]);
+
+  useEffect(() => {
+    asyncFetchBlogCategorys().then((res: any) => {
+      setCategorys(res.list)
+    });
+
+    asyncFetchBlogTags().then((res: any) => {
+      setTags(res.list)
+    });
+  }, [])
 
   useEffect(() => {
     fetchBlogs();
@@ -98,13 +115,13 @@ const BlogManagement = () => {
         dataIndex: 'publish',
         width: 100,
         render: (publish) => (
-          <Tag color={publish === '发布' || publish === 'publish' ? 'green' : 'red'}>{publish}</Tag>
+          <Tag color={publish  ? 'green' : 'red'}>{publish ? '发布' : '草稿'}</Tag>
         )
       },
       {
         key: 'category',
         title: '文章类型',
-        dataIndex: 'blog_category_name',
+        dataIndex: 'categoryName',
         width: 100,
       },
       {
@@ -167,11 +184,70 @@ const BlogManagement = () => {
     setCurPage(page);
   }
 
+  const handleSearch = () => {
+    setCurPage(1);
+    asyncSearchBlogList(form.getFieldsValue(), curPage).then(res => {
+      const { list, total } = res.data;
+      setTotal(parseInt(total))
+      setBlogs(list.map((item, i) => {
+        item.key = i;
+        return item;
+      }));
+    })
+  }
+
+  const handleReset = () => {
+    form.resetFields();
+    fetchBlogs();
+  }
+
 
   return (
     <div className={styles.blogManagement}>
       <div className={styles.actions}>
         <Button type="primary" onClick={showAddBlogModal}>新增博客</Button>
+      </div>
+      <div className={styles.searchContent}>
+        <Form form={form}>
+          <Row gutter={24}>
+            <Col span={5}>
+              <Form.Item label="标题" name="title">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={5}>
+              <Form.Item label="作者" name="author">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={5}>
+              <Form.Item label="文章类型" name="categoryId">
+                <Select>
+                  {
+                    categorys?.map((cat: any) => (
+                      <Select.Option key={cat.id}>{cat.name}</Select.Option>
+                    ))
+                  }
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={5}>
+              <Form.Item label="标签" name="tagId">
+                <Select>
+                  {
+                    tags?.map((tag: any) => (
+                      <Select.Option key={tag.id}>{tag.name}</Select.Option>
+                    ))
+                  }
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={4}>
+              <Button onClick={handleSearch} type='primary'>搜索</Button>
+              <Button onClick={handleReset} style={{marginLeft: 24}}>重置</Button>
+            </Col>
+          </Row>
+        </Form>
       </div>
       <div className={styles.table}>
         <Table

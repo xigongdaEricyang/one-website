@@ -18,7 +18,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网产品概要",
+@Erupt(name = "Website Product Feature",
         power = @Power(importable = true, export = true)
 )
 @Entity
@@ -27,26 +27,26 @@ import javax.persistence.Table;
 @Setter
 public class FeatureEN extends HyperModel {
     @EruptField(
-            views = @View(title = "简要特性"),
-            edit = @Edit(title = "简要特性", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Content"),
+            edit = @Edit(title = "Content", notNull = true, search = @Search(vague = true))
     )
     private String content;
 
     @EruptField(
-            views = @View(title = "副标题"),
-            edit = @Edit(title = "副标题", search = @Search(vague = true))
+            views = @View(title = "Subtitle"),
+            edit = @Edit(title = "Subtitle", search = @Search(vague = true))
     )
     private String subContent;
 
     @EruptField(
-            views = @View(title = "简要特性描述"),
-            edit = @Edit(title = "简要特性描述", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Description"),
+            edit = @Edit(title = "Description", notNull = true, search = @Search(vague = true))
     )
     private String description;
 
     @EruptField(
-            views = @View(title = "描述图片", type = ViewType.IMAGE),
-            edit = @Edit(title = "描述图片", type = EditType.INPUT)
+            views = @View(title = "Pic Link", type = ViewType.IMAGE),
+            edit = @Edit(title = "Pic Link", type = EditType.INPUT)
     )
     private String link;
 }

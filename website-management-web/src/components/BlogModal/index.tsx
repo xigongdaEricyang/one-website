@@ -52,7 +52,7 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
       // setBlogData(curData)
       form.setFieldsValue({
         ...curData,
-        tags: curData.tags.map((item: any) => item.name),
+        tags: (curData.tags || []).map((item: any) => item.name),
         publish: curData?.publish === '发布' ? true : false
       });
     });
@@ -71,12 +71,12 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
   const handleOkClick = () => {
     form.validateFields().then(async (values) => {
       setLoading(true);
-      const blog_category = categorys.find((item: any) => item.id.toString() === values.blog_category_name);
+      const blog_category = categorys.find((item: any) => item.name === values.blog_category_name);
       const fn = type === 'add' ? asyncCreateBlog : asyncEditBlog;
       const { data: res } = await fn({
         ...values,
         blog_category,
-        tags: values.tags.map(tag => {
+        tags: (values.tags || []).map(tag => {
           const t = tags.find(t => t.name === tag);
           if (t) return t;
           return { name: tag }
@@ -214,8 +214,8 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
               ]}>
               <Select>
                 {
-                  categorys.map((cat: any) => (
-                    <Select.Option key={cat.id}>{cat.name}</Select.Option>
+                  categorys?.map((cat: any) => (
+                    <Select.Option key={cat.name}>{cat.name}</Select.Option>
                   ))
                 }
               </Select>
@@ -225,7 +225,7 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
             <Form.Item label="标签" name="tags">
               <Select mode="tags">
                 {
-                  tags.map((tag: any) => (
+                  tags?.map((tag: any) => (
                     <Select.Option key={tag.name}>{tag.name}</Select.Option>
                   ))
                 }

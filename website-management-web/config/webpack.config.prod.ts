@@ -8,6 +8,8 @@ import packageJson from '../package.json';
 
 import { baseConifg } from './webpack.config.base';
 
+const EDITOR_PATH = path.resolve(__dirname, "./node_modules/react-markdown-editor-lite");
+
 const publicConfig: Configuration = {
   mode: 'production',
   output: {
@@ -20,7 +22,11 @@ const publicConfig: Configuration = {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        include: [EDITOR_PATH],
+        use: [
+            MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
       },
     ],
   },

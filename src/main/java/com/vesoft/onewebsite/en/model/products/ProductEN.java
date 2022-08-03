@@ -18,7 +18,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网产品信息",
+@Erupt(name = "Website Product Info",
         power = @Power(importable = true, export = true),
         linkTree = @LinkTree(field = "product_category")
 )
@@ -28,20 +28,20 @@ import java.util.Set;
 @Setter
 public class ProductEN extends HyperModel {
     @EruptField(
-            views = @View(title = "主标题"),
-            edit = @Edit(title = "主标题", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Main Title"),
+            edit = @Edit(title = "Main Title", notNull = true, search = @Search(vague = true))
     )
     private String name;
 
     @EruptField(
-            views = @View(title = "产品描述"),
-            edit = @Edit(title = "产品描述", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Description"),
+            edit = @Edit(title = "Description", notNull = true, search = @Search(vague = true))
     )
     private String description;
 
     @EruptField(
-            views = @View(title = "主图", type= ViewType.IMAGE),
-            edit = @Edit(title = "主图", notNull = true, type = EditType.INPUT)
+            views = @View(title = "Main Pic Link", type= ViewType.IMAGE),
+            edit = @Edit(title = "Main Pic Link", notNull = true, type = EditType.INPUT)
     )
     private String main_pic;
 
@@ -62,69 +62,69 @@ public class ProductEN extends HyperModel {
 
     @ManyToOne
     @EruptField(
-            views = @View(title = "产品类型", column = "name"),
-            edit = @Edit(title = "产品类型", notNull = true, type = EditType.REFERENCE_TREE)
+            views = @View(title = "category", column = "name"),
+            edit = @Edit(title = "category", notNull = true, type = EditType.REFERENCE_TREE)
     )
     private ProductCategoryEN product_category;
 
     @EruptField(
-            views = @View(title = "特性概要"),
-            edit = @Edit(title = "特性概要", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Summary"),
+            edit = @Edit(title = "Summary", notNull = true, search = @Search(vague = true))
     )
     private String summary;
 
     @EruptField(
-            views = @View(title = "特性概要详情", type=ViewType.TEXT),
-            edit = @Edit(title = "特性概要详情", search = @Search(vague = true), type = EditType.TEXTAREA)
+            views = @View(title = "Summary Detail", type=ViewType.TEXT),
+            edit = @Edit(title = "Summary Detail", search = @Search(vague = true), type = EditType.TEXTAREA)
     )
     @Column(columnDefinition = "LONGTEXT NOT NULL")
     private String summary_feature;
 
     @EruptField(
-            views = @View(title = "特性概要图片", type=ViewType.IMAGE),
-            edit = @Edit(title = "特性概要图片", type = EditType.INPUT)
+            views = @View(title = "Summary Pic Link", type=ViewType.IMAGE),
+            edit = @Edit(title = "Summary Pic Link", type = EditType.INPUT)
     )
     private String summary_feature_pic;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="product_id")
     @EruptField(
-            views = @View(title = "添加feature"),
-            edit = @Edit(title = "添加feature", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
+            views = @View(title = "features"),
+            edit = @Edit(title = "features", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
     )
     private Set<FeatureEN> features;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="product_id")
     @EruptField(
-            views = @View(title = "优势"),
-            edit = @Edit(title = "优势", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
+            views = @View(title = "Advantage"),
+            edit = @Edit(title = "Advantage", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
     )
     private Set<AdvantageEN> advantages;
 
     @EruptField(
-            views = @View(title = "使用原因子标题"),
-            edit = @Edit(title = "使用原因子标题", notNull = true)
+            views = @View(title = "Reason Subtitle"),
+            edit = @Edit(title = "Reason Subtitle", notNull = true)
     )
     private String reason_subtitle;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="product_id")
     @EruptField(
-            views = @View(title = "使用原因"),
-            edit = @Edit(title = "使用原因", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
+            views = @View(title = "Reasons"),
+            edit = @Edit(title = "Reasons", search = @Search(vague = true), type = EditType.TAB_TABLE_ADD)
     )
     private Set<ReasonEN> reasons;
 
     @EruptField(
-            views = @View(title = "视频url", type = ViewType.LINK),
-            edit = @Edit(title = "视频url")
+            views = @View(title = "Video Link", type = ViewType.LINK),
+            edit = @Edit(title = "Video Link")
     )
     private String video_url;
 
     @EruptField(
-            views= @View(title = "其他信息", type = ViewType.CODE),
-            edit = @Edit(title = "其他信息", type = EditType.CODE_EDITOR)
+            views= @View(title = "Other", type = ViewType.CODE),
+            edit = @Edit(title = "Other", type = EditType.CODE_EDITOR)
     )
     private String other;
 }

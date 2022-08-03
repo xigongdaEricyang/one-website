@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网同路人信息",
+@Erupt(name = "Website Partner Info",
         power = @Power(importable = true, export = true),
         linkTree = @LinkTree(field = "partner_category")
 )
@@ -28,33 +28,33 @@ import javax.persistence.Table;
 @Setter
 public class PartnerEN extends HyperModel {
     @EruptField(
-            views = @View(title = "公司LOGO", type= ViewType.IMAGE),
-            edit = @Edit(title = "公司LOGO", type = EditType.INPUT)
+            views = @View(title = "Logo", type= ViewType.IMAGE),
+            edit = @Edit(title = "Logo", type = EditType.INPUT)
     )
     private String logo;
 
     @EruptField(
-            views = @View(title = "简介", type= ViewType.TEXT),
-            edit = @Edit(title = "简介", type = EditType.TEXTAREA)
+            views = @View(title = "Description", type= ViewType.TEXT),
+            edit = @Edit(title = "Description", type = EditType.TEXTAREA)
     )
     private String description;
 
     @ManyToOne
     @EruptField(
-            views = @View(title = "分类", column = "name"),
-            edit = @Edit(title = "分类", notNull = true, type = EditType.REFERENCE_TREE)
+            views = @View(title = "Category", column = "name"),
+            edit = @Edit(title = "Category", notNull = true, type = EditType.REFERENCE_TREE)
     )
     private PartnerCategoryEN partner_category;
 
     @EruptField(
-            views = @View(title = "文章id", type = ViewType.TEXT),
-            edit = @Edit(title = "文章id", type = EditType.INPUT)
+            views = @View(title = "Blog Slug", type = ViewType.TEXT),
+            edit = @Edit(title = "Blog Slug", type = EditType.INPUT)
     )
-    private String blog_id;
+    private String blog_slug;
 
     @EruptField(
-            views= @View(title = "其他信息", type = ViewType.CODE),
-            edit = @Edit(title = "其他信息", type = EditType.CODE_EDITOR)
+            views= @View(title = "Other", type = ViewType.CODE),
+            edit = @Edit(title = "Other", type = EditType.CODE_EDITOR)
     )
     private String other;
 }

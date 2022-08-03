@@ -6,7 +6,14 @@ export const DEFAULT_PAGE_SIZE = 10;
 const getEntity = (entity: string) => {
   return curLanguage === Language.ZH_CN ? entity : `${entity}EN`;
 }
-// const entity = curLanguage === Language.ZH_CN ? 'Blog' : 'BlogEN';
+
+const getHost = () => {
+  const { protocol, hostname } = location;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://192.168.8.116'
+  }
+  return `${protocol}://${hostname}`;
+}
 
 export const asyncCreateBlog = async (data) => {
   const entity = getEntity('Blog');
@@ -43,22 +50,17 @@ export const asyncEditBlog = async (data) => {
 }
 
 export const asyncFetchBlogs = async (pageIndex: number) => {
-  const entity = getEntity('Blog');
-  const res = await axios.post(
-    `/erupt-api/data/table/${entity}`,
+  const res = await axios.get(
+    `${getHost()}/website/blog/list`,
     {
-      pageIndex,
-      pageSize: DEFAULT_PAGE_SIZE,
-      sort: 'id'
-    },
-    {
-      headers: {
-        token: (parent as any).getAppToken().token,
-        erupt: entity
-      },
-    });
+      params: {
+        page: pageIndex,
+        pageSize: DEFAULT_PAGE_SIZE,
+      }
+    }
+    );
   if (res.status === 200) {
-    return res.data;
+    return res.data.data;
   }
   return {
     list: [],
@@ -147,4 +149,18 @@ export const asyncFetchBlogTags = async () => {
     list: [],
     total: 0
   };
+}
+
+export const asyncSearchBlogList = async (data, pageIndex) => {
+  const res = await axios.get(
+    `${getHost()}/website/blog/list`,
+    {
+      params: {
+        page: pageIndex,
+        pageSize: DEFAULT_PAGE_SIZE,
+        ...data
+      },
+    }
+  )
+  return res.data;
 }

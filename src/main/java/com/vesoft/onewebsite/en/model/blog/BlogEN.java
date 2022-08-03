@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Set;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网博客文章_英文",
+@Erupt(name = "Website Blog",
         power = @Power(importable = true, export = true),
         linkTree = @LinkTree(field = "blog_category")
 )
@@ -57,10 +57,17 @@ public class BlogEN extends HyperModel {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="blog_id")
     @EruptField(
-            views = @View(title = "标签", type=ViewType.TEXT),
-            edit = @Edit(title = "标签", notNull = true, type = EditType.TAB_TABLE_ADD, search = @Search(vague = true))
+            views = @View(title = "Tag", type=ViewType.TEXT),
+            edit = @Edit(title = "Tag", notNull = true, type = EditType.TAB_TABLE_ADD, search = @Search(vague = true))
     )
     private Set<BlogTagEN> tags;
+
+    @ManyToOne
+    @EruptField(
+            views = @View(title = "Category", column = "name"),
+            edit = @Edit(title = "Category", notNull = true, type = EditType.REFERENCE_TREE)
+    )
+    private BlogCategoryEN blog_category;
 
     @EruptField(
             views = @View(title = "Description"),

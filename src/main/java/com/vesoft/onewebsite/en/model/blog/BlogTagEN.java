@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网博客标签",
+@Erupt(name = "Website Blog Tag",
         power = @Power(importable = true, export = true)
 )
 @Entity
@@ -25,8 +25,8 @@ import javax.persistence.Table;
 public class BlogTagEN extends HyperModel {
 
     @EruptField(
-            views = @View(title = "标签名称"),
-            edit = @Edit(title = "标签名称", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Tag Name"),
+            edit = @Edit(title = "Tag Name", notNull = true, search = @Search(vague = true))
     )
     private String name;
 }

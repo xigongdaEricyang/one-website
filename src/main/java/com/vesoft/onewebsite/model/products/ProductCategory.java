@@ -34,8 +34,16 @@ public class ProductCategory extends HyperModel {
     private String remark;
 
     @EruptField(
+            views = @View(title = "Sort"),
+            edit = @Edit(title = "Sort")
+    )
+    private Integer sort;
+
+    @EruptField(
             views= @View(title = "其他信息", type = ViewType.CODE),
             edit = @Edit(title = "其他信息", type = EditType.CODE_EDITOR)
     )
     private String other;
+
+
 }

@@ -13,25 +13,31 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "产品类型", desc = "产品类型")
+@Erupt(name = "Website Product Category", desc = "Product Category")
 @Table(name = "website_product_category")
 @Entity
 public class ProductCategoryEN extends HyperModel {
     @EruptField(
-            views = @View(title = "产品名称", type= ViewType.TEXT),
-            edit = @Edit(title = "产品名称", type = EditType.INPUT, notNull = true)
+            views = @View(title = "Name", type= ViewType.TEXT),
+            edit = @Edit(title = "Name", type = EditType.INPUT, notNull = true)
     )
     private String name;
 
     @EruptField(
-            views = @View(title = "是否显示"),
-            edit = @Edit(title = "是否显示", notNull = true)
+            views = @View(title = "Is Show"),
+            edit = @Edit(title = "Is Show", notNull = true)
     )
     private Boolean is_show;
 
     @EruptField(
-            views = @View(title = "备注"),
-            edit = @Edit(title = "备注", type = EditType.TEXTAREA)
+            views = @View(title = "Sort"),
+            edit = @Edit(title = "Sort")
+    )
+    private Integer sort;
+
+    @EruptField(
+            views = @View(title = "Remark"),
+            edit = @Edit(title = "Remark", type = EditType.TEXTAREA)
     )
     private String remark;
 }

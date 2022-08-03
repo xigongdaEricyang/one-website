@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "官网产品使用原因",
+@Erupt(name = "Website Product Reason",
         power = @Power(importable = true, export = true)
 )
 @Entity
@@ -26,15 +26,15 @@ import javax.persistence.Table;
 @Setter
 public class ReasonEN extends HyperModel {
     @EruptField(
-            views = @View(title = "简要原因"),
-            edit = @Edit(title = "简要原因", notNull = true, search = @Search(vague = true))
+            views = @View(title = "Reason"),
+            edit = @Edit(title = "Reason", notNull = true, search = @Search(vague = true))
     )
     private String content;
 
 
     @EruptField(
-            views = @View(title = "描述图片", type = ViewType.IMAGE),
-            edit = @Edit(title = "描述图片", type = EditType.INPUT)
+            views = @View(title = "Icon Link", type = ViewType.IMAGE),
+            edit = @Edit(title = "Icon Link", type = EditType.INPUT)
     )
     private String icon;
 }

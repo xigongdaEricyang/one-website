@@ -15,17 +15,17 @@ import xyz.erupt.jpa.model.BaseModel;
         name = "e_upms_user"
 )
 @Erupt(
-        name = "简单用户对象"
+        name = "Simple User Object"
 )
 @EruptI18n
 public class EruptUserVo extends BaseModel {
     @EruptField(
             views = {@View(
-                    title = "姓名",
+                    title = "Name",
                     sortable = true
             )},
             edit = @Edit(
-                    title = "姓名",
+                    title = "Name",
                     notNull = true,
                     search = @Search(
                             vague = true

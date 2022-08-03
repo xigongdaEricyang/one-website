@@ -71,4 +71,10 @@ public class VersionCompare extends HyperModel {
             ), search = @Search)
     )
     private String version;
+
+    @EruptField(
+            views = @View(title = "Sort"),
+            edit = @Edit(title = "Sort")
+    )
+    private Integer sort;
 }
