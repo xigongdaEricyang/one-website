@@ -12,7 +12,8 @@ const getHost = () => {
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
     return 'http://192.168.8.116'
   }
-  return `${protocol}://${hostname}`;
+  let curProtocol = protocol.includes('https') ? 'https' : 'http';
+  return `${curProtocol}://${hostname}`;
 }
 
 export const asyncCreateBlog = async (data) => {
