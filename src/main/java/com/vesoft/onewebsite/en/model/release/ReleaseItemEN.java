@@ -14,7 +14,7 @@ import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.core.annotation.EruptDataSource;
 
 @EruptDataSource("english_datasource")
-@Erupt(name = "Release Item", desc = "Release Item", orderBy = "ReleaseItem.sort")
+@Erupt(name = "Release Item", desc = "Release Item", orderBy = "ReleaseItemEN.sort")
 @Table(name = "website_release_category")
 @Entity
 public class ReleaseItemEN extends HyperModel {
