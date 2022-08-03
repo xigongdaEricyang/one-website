@@ -16,6 +16,10 @@ const getHost = () => {
   return `${curProtocol}://${hostname}`;
 }
 
+const getWebsiteSuffix = () => {
+  return curLanguage === Language.ZH_CN ? 'website' : 'website_en'
+}
+
 export const asyncCreateBlog = async (data) => {
   const entity = getEntity('Blog');
   const res = await axios.post(
@@ -52,7 +56,7 @@ export const asyncEditBlog = async (data) => {
 
 export const asyncFetchBlogs = async (pageIndex: number) => {
   const res = await axios.get(
-    `${getHost()}/website/blog/list`,
+    `${getHost()}/${getWebsiteSuffix()}/blog/list`,
     {
       params: {
         page: pageIndex,
@@ -154,7 +158,7 @@ export const asyncFetchBlogTags = async () => {
 
 export const asyncSearchBlogList = async (data, pageIndex) => {
   const res = await axios.get(
-    `${getHost()}/website/blog/list`,
+    `${getHost()}/${getWebsiteSuffix()}/blog/list`,
     {
       params: {
         page: pageIndex,
