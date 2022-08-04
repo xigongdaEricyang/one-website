@@ -9,6 +9,8 @@ services:
       MYSQL_EN_PASSWORD: ${MYSQL_EN_PASSWORD}
       MYSQL_EN_TZ: ${MYSQL_EN_TZ}
       MAGIC_LOCATION_PATH: ${MAGIC_LOCATION_PATH}
+      SECURITY_USERNAME: ${SECURITY_USERNAME}
+      SECURITY_PASSWORD: ${SECURITY_PASSWORD}
     volumes:
       - ./src/main/resources/application.yml:/usr/local/lib/application.yml
       - ./magic-scripts:/opt/metadata/magic-api

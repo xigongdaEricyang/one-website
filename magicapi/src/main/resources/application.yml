@@ -15,6 +15,9 @@ magic-api:
     page: page
     default-page: 1
     default-size: 10
+  security:
+    username: ${SECURITY_USERNAME}
+    password: ${SECURITY_PASSWORD}
 
 
 spring:
