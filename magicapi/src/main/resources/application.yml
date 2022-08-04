@@ -1,7 +1,7 @@
 server:
   port: 9999
 magic-api:
-  web: /
+  web: /magic/web
   resource:
     location: ${MAGIC_LOCATION_PATH}
   show-url: false
