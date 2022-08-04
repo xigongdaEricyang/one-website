@@ -1,0 +1,21 @@
+version: "3"
+services:
+  magicapi:
+    restart: always
+    build: .
+    environment:
+      MYSQL_CN_URL: ${MYSQL_CN_URL}
+      MYSQL_CN_USERNAME: ${MYSQL_CN_USERNAME}
+      MYSQL_CN_PASSWORD: ${MYSQL_CN_PASSWORD}
+      MYSQL_CN_TZ: ${MYSQL_CN_TZ}
+      MYSQL_EN_URL: ${MYSQL_EN_URL}
+      MYSQL_EN_USERNAME: ${MYSQL_EN_USERNAME}
+      MYSQL_EN_PASSWORD: ${MYSQL_EN_PASSWORD}
+      MYSQL_EN_TZ: ${MYSQL_EN_TZ}
+    volumes:
+      - ./src/main/resources/application.yml:/usr/local/lib/application.yml
+      - ./magic-scripts:/opt/metadata/magic-api
+    ports:
+      - 9999:9999
+    
+
