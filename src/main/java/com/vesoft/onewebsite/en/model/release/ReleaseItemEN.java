@@ -21,6 +21,9 @@ public class ReleaseItemEN extends HyperModel {
     @EruptField(views = @View(title = "Name", type = ViewType.TEXT), edit = @Edit(title = "Name", type = EditType.INPUT, notNull = true))
     private String name;
 
+    @EruptField(views = @View(title = "Category", type = ViewType.TEXT), edit = @Edit(title = "Category", type = EditType.INPUT, notNull = true))
+    private String category;
+
     @EruptField(views = @View(title = "Description"), edit = @Edit(title = "Description", notNull = true))
     @Column(columnDefinition = "TEXT")
     private String description;
