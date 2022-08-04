@@ -4,10 +4,6 @@ services:
     restart: always
     build: .
     environment:
-      MYSQL_CN_URL: ${MYSQL_CN_URL}
-      MYSQL_CN_USERNAME: ${MYSQL_CN_USERNAME}
-      MYSQL_CN_PASSWORD: ${MYSQL_CN_PASSWORD}
-      MYSQL_CN_TZ: ${MYSQL_CN_TZ}
       MYSQL_EN_URL: ${MYSQL_EN_URL}
       MYSQL_EN_USERNAME: ${MYSQL_EN_USERNAME}
       MYSQL_EN_PASSWORD: ${MYSQL_EN_PASSWORD}
