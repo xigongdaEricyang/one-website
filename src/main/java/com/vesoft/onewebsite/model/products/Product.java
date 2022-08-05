@@ -43,21 +43,6 @@ public class Product extends HyperModel {
     )
     private String main_pic;
 
-//    @EruptField(
-//        views = @View(title = "产品类型"),
-//        edit = @Edit(title = "产品类型", type = EditType.CHOICE,
-//        choiceType = @ChoiceType(
-//                vl = {
-//                    @VL(label = "Nebula Graph", value = "nebulagraph"),
-//                    @VL(label = "Explorer", value = "explorer"),
-//                    @VL(label = "Dashboard", value = "dashboard"),
-//                    @VL(label = "Studio", value = "studio"),
-//                    @VL(label = "Cloud", value = "cloud"),
-//                }
-//        ))
-//    )
-//    private String type;
-
     @ManyToOne
     @EruptField(
             views = @View(title = "产品类型", column = "name"),

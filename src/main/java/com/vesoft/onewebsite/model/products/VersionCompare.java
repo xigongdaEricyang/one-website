@@ -28,35 +28,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 public class VersionCompare extends HyperModel {
-    @EruptField(
-            views = @View(title = "功能类型"),
-            edit = @Edit(title = "功能类型", search = @Search(vague = true))
-    )
-    private String function_type;
-
-//    @EruptField(
-//            views = @View(title = "产品类型"),
-//            edit = @Edit(title = "产品类型", type = EditType.CHOICE,
-//                    choiceType = @ChoiceType(
-//                            vl = {
-//                                    @VL(label = "Nebula Graph", value = "nebulagraph"),
-//                                    @VL(label = "Explorer", value = "explorer"),
-//                                    @VL(label = "Dashboard", value = "dashboard"),
-//                                    @VL(label = "Studio", value = "studio"),
-//                                    @VL(label = "Cloud", value = "cloud"),
-//                            }
-//                    ), search = @Search(vague = true))
-//
-//    )
-//    private String product_type;
-
-    @ManyToOne
-    @EruptField(
-            views = @View(title = "产品类型", column = "name"),
-            edit = @Edit(title = "产品类型", notNull = true, type = EditType.REFERENCE_TREE)
-    )
-    private ProductCategory product_category;
-
 
     @EruptField(
             views = @View(title = "功能名称", type = ViewType.TEXT),
