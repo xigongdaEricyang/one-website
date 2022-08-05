@@ -3,7 +3,7 @@ erupt-app:
   pwdTransferEncrypt: true
   locales: [ "zh-CN", "en-US"]
 erupt:
-  csrfInspect: true
+  csrfInspect: false
   redisSession: false
 # need to replace
   uploadPath: /opt/erupt-attachment
