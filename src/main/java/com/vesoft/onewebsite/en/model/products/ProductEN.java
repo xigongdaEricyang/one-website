@@ -126,5 +126,6 @@ public class ProductEN extends HyperModel {
             views= @View(title = "Other", type = ViewType.CODE),
             edit = @Edit(title = "Other", type = EditType.CODE_EDITOR)
     )
+    @Column(columnDefinition = "LONGTEXT NOT NULL")
     private String other;
 }
