@@ -12,6 +12,7 @@ import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.model.base.HyperModel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -27,6 +28,7 @@ public class UnionDictionary extends HyperModel {
             views = @View(title = "Key"),
             edit = @Edit(title = "Key", notNull = true, search = @Search(vague = true))
     )
+    @Column(columnDefinition = "LONGTEXT")
     private String dict_key;
 
     @EruptField(
