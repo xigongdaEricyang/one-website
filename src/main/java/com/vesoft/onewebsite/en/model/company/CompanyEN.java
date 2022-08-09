@@ -50,6 +50,12 @@ public class CompanyEN extends HyperModel {
     private String slug;
 
     @EruptField(
+            views = @View(title = "Sort"),
+            edit = @Edit(title = "Sort")
+    )
+    private Integer sort;
+
+    @EruptField(
             views= @View(title = "Other", type = ViewType.CODE),
             edit = @Edit(title = "Other", type = EditType.CODE_EDITOR)
     )
