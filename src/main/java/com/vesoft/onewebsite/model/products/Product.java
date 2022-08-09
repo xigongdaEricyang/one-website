@@ -109,7 +109,7 @@ public class Product extends HyperModel {
             views= @View(title = "其他信息", type = ViewType.CODE),
             edit = @Edit(title = "其他信息", type = EditType.CODE_EDITOR)
     )
-    @Column(columnDefinition = "LONGTEXT NOT NULL")
+    @Column(columnDefinition = "LONGTEXT")
     private String other;
 
 }

@@ -54,11 +54,14 @@ public class BlogEN extends HyperModel {
     )
     private String author;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="blog_id")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(
+            name = "website_blog_tag_join",
+            joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     @EruptField(
-            views = @View(title = "Tag", type=ViewType.TEXT),
-            edit = @Edit(title = "Tag", notNull = true, type = EditType.TAB_TABLE_ADD, search = @Search(vague = true))
+            edit = @Edit(title = "Tag", type = EditType.TAB_TABLE_ADD,
+                    referenceTableType = @ReferenceTableType(label = "tag"))
     )
     private Set<BlogTagEN> tags;
 

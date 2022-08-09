@@ -7,10 +7,13 @@ import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
+import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
+import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.EruptDataSource;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -29,4 +32,11 @@ public class BlogTagEN extends HyperModel {
             edit = @Edit(title = "Tag Name", notNull = true, search = @Search(vague = true))
     )
     private String name;
+
+    @EruptField(
+            views= @View(title = "Other", type = ViewType.CODE),
+            edit = @Edit(title = "Other", type = EditType.CODE_EDITOR)
+    )
+    @Column(columnDefinition = "LONGTEXT")
+    private String other;
 }
