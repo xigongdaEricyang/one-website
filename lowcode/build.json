@@ -6,7 +6,7 @@
   "devServer": {
     "hot": false
   },
-  "publicPath": "/",
+  "publicPath": "/lowcode",
   "externals": {
     "react": "var window.React",
     "react-dom": "var window.ReactDOM",

@@ -39,4 +39,4 @@ logs/
 magic-scripts/
 attachments/
 
-!**/*/one-website-*.jar
+# !**/*/one-website-*.jar

@@ -2,12 +2,19 @@ const { join } = require('path');
 const fs = require('fs-extra');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const packageJson = require('./package.json');
 
 const scenarioNames = fs.readdirSync(join('./src/scenarios')).filter(name => !name.startsWith('.'));
 const { version } = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-
+// console.log('zzzz', path.join(__dirname, '../src/main/resources/public/web'));
 module.exports = ({ onGetWebpackConfig }) => {
   onGetWebpackConfig((config) => {
+    // config.output
+    // .path(path.join(__dirname, '../src/main/resources/public/lowcode'))
+    // .filename(`${packageJson.version}/[name].js`)
+    // .chunkFilename(`${packageJson.version}/[name].js`)
+    // .publicPath('/lowcode');
     config.resolve.plugin('tsconfigpaths').use(TsconfigPathsPlugin, [
       {
         configFile: './tsconfig.json',
