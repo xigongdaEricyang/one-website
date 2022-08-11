@@ -44,4 +44,7 @@ public class AdvantageEN extends HyperModel {
             edit = @Edit(title = "Pic Link", type = EditType.INPUT)
     )
     private String link;
+
+    @EruptField(views = @View(title = "Sort"), edit = @Edit(title = "Sort"))
+    private Integer sort;
 }

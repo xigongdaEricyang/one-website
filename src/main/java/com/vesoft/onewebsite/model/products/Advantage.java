@@ -37,6 +37,9 @@ public class Advantage extends HyperModel {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @EruptField(views = @View(title = "Sort"), edit = @Edit(title = "Sort"))
+    private Integer sort;
+
     @EruptField(
             views = @View(title = "描述图片", type = ViewType.IMAGE),
             edit = @Edit(title = "描述图片", type = EditType.INPUT)

@@ -37,4 +37,7 @@ public class Reason extends HyperModel {
             edit = @Edit(title = "描述图片", type = EditType.INPUT)
     )
     private String icon;
+
+    @EruptField(views = @View(title = "Sort"), edit = @Edit(title = "Sort"))
+    private Integer sort;
 }

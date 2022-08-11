@@ -39,4 +39,7 @@ public class ReasonEN extends HyperModel {
             edit = @Edit(title = "Icon Link", type = EditType.INPUT)
     )
     private String icon;
+
+    @EruptField(views = @View(title = "Sort"), edit = @Edit(title = "Sort"))
+    private Integer sort;
 }
