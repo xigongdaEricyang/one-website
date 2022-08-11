@@ -22,7 +22,7 @@ import javax.persistence.Table;
         power = @Power(importable = true, export = true)
 )
 @Entity
-@Table(name = "website_product_feature")
+@Table(name = "website_product_advantage")
 @Getter
 @Setter
 public class AdvantageEN extends HyperModel {
