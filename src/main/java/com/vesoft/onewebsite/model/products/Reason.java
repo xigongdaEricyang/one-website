@@ -12,6 +12,7 @@ import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.model.base.HyperModel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -25,8 +26,9 @@ import javax.persistence.Table;
 public class Reason extends HyperModel {
     @EruptField(
             views = @View(title = "简要原因"),
-            edit = @Edit(title = "简要原因", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "简要原因", type = EditType.TEXTAREA, notNull = true, search = @Search(vague = true))
     )
+    @Column(columnDefinition = "TEXT")
     private String content;
 
 
