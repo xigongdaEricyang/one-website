@@ -30,6 +30,12 @@ public class ProductCategoryEN extends HyperModel {
     private Boolean is_show;
 
     @EruptField(
+      views = @View(title = "primary_key", type= ViewType.TEXT),
+      edit = @Edit(title = "primary_key", type = EditType.INPUT, notNull = true)
+    )
+    private String primary_key;
+
+    @EruptField(
             views = @View(title = "Sort"),
             edit = @Edit(title = "Sort")
     )

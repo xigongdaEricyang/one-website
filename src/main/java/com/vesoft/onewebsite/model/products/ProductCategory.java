@@ -22,6 +22,12 @@ public class ProductCategory extends HyperModel {
     private String name;
 
     @EruptField(
+      views = @View(title = "产品唯一ID", type= ViewType.TEXT),
+      edit = @Edit(title = "产品唯一ID", type = EditType.INPUT, notNull = true)
+    )
+    private String primary_key;
+
+    @EruptField(
             views = @View(title = "是否显示"),
             edit = @Edit(title = "是否显示", notNull = true)
     )
