@@ -12,19 +12,26 @@ services:
     restart: always
     build: .
     environment:
-      MYSQL_CN_URL: ${MYSQL_CN_URL}
-      MYSQL_CN_USERNAME: ${MYSQL_CN_USERNAME}
-      MYSQL_CN_PASSWORD: ${MYSQL_CN_PASSWORD}
-      MYSQL_CN_TZ: ${MYSQL_CN_TZ}
-      MYSQL_EN_URL: ${MYSQL_EN_URL}
-      MYSQL_EN_USERNAME: ${MYSQL_EN_USERNAME}
-      MYSQL_EN_PASSWORD: ${MYSQL_EN_PASSWORD}
-      MYSQL_EN_TZ: ${MYSQL_EN_TZ}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./src/main/resources/application.yml:/usr/local/lib/application.yml
       - ./magic-scripts:/opt/metadata/magic-api
       - ./attachments:/opt/erupt-attachment
+      - ./data:/opt/data
     ports:
       - 8080:8080
+    depends_on:
+      - mysql
+  mysql:
+    restart: always
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "TZ=${MYSQL_TZ}"
+      - "MYSQL_DATABASE=onewebsite"
     
 

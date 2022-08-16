@@ -33,8 +33,9 @@ public class Product extends HyperModel {
 
     @EruptField(
             views = @View(title = "产品描述"),
-            edit = @Edit(title = "产品描述", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "产品描述", type = EditType.TEXTAREA, notNull = true, search = @Search(vague = true))
     )
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @EruptField(

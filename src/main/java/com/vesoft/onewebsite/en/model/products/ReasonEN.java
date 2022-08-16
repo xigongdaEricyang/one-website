@@ -13,6 +13,7 @@ import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.EruptDataSource;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -27,8 +28,9 @@ import javax.persistence.Table;
 public class ReasonEN extends HyperModel {
     @EruptField(
             views = @View(title = "Reason"),
-            edit = @Edit(title = "Reason", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "Reason", type = EditType.TEXTAREA, notNull = true, search = @Search(vague = true))
     )
+    @Column(columnDefinition = "TEXT")
     private String content;
 
 
@@ -37,4 +39,7 @@ public class ReasonEN extends HyperModel {
             edit = @Edit(title = "Icon Link", type = EditType.INPUT)
     )
     private String icon;
+
+    @EruptField(views = @View(title = "Sort"), edit = @Edit(title = "Sort"))
+    private Integer sort;
 }

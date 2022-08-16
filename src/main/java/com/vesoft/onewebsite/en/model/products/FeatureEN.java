@@ -10,10 +10,10 @@ import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.ViewType;
-import xyz.erupt.annotation.sub_field.sub_edit.AttachmentType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.EruptDataSource;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -40,8 +40,9 @@ public class FeatureEN extends HyperModel {
 
     @EruptField(
             views = @View(title = "Description"),
-            edit = @Edit(title = "Description", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "Description", type = EditType.TEXTAREA, notNull = true, search = @Search(vague = true))
     )
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @EruptField(
@@ -49,5 +50,8 @@ public class FeatureEN extends HyperModel {
             edit = @Edit(title = "Pic Link", type = EditType.INPUT)
     )
     private String link;
+
+    @EruptField(views = @View(title = "Sort"), edit = @Edit(title = "Sort"))
+    private Integer sort;
 }
 
