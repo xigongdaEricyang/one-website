@@ -80,11 +80,7 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
         blog_category,
         tags: (values.tags || []).map(tag => {
           const t = tags.find(t => parseInt(t.id) === parseInt(tag));
-          if (t) {
-            t.id = parseInt(t.id);
-            return t;
-          };
-          return { name: tag }
+          return { name: t.name }
         }),
         id: data ? parseInt(data.id) : undefined,
       });
