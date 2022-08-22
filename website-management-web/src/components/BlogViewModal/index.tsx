@@ -5,7 +5,7 @@ import ModalWrapper from '@/components/ModalWrapper';
 import styles from './index.module.less';
 import { useForm } from 'antd/lib/form/Form';
 import MarkdownEditor from '../MarkdownEditor';
-import { asyncFetchBlogById } from '@/request';
+import { asyncFetchBlogById, asyncFetchBlogTags } from '@/request';
 // import { asyncCreateBlog } from '@/request';
 
 interface IProps {
@@ -28,7 +28,13 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
 
   const [blogData, setBlogData] = useState(data);
 
+  const [tags, setTags] = useState<any>([]);
+
   useEffect(() => {
+    asyncFetchBlogTags().then((res: any) => {
+      const tags = res.list;
+      setTags(tags)
+    });
     asyncFetchBlogById(data.id).then((curData: any) => {
       // setBlogData(curData)
       setBlogData(curData)
@@ -57,10 +63,6 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
     //   setCurVisible(false);
     // })
   };
-
-
-  const [form] = useForm();
-
   return (
     <Modal
       title="查看详情"
@@ -90,12 +92,12 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
           {data.slug}
         </Descriptions.Item>
         <Descriptions.Item label="分类">
-          {data.blog_category_name}
+          {blogData.blog_category_name}
         </Descriptions.Item>
         <Descriptions.Item label="标签">
           {
             (blogData?.tags || []).map((item: any) => (
-              <Tag title={item.name} color='default'>{item.name}</Tag>
+              <Tag title={item.name} color='default'>{tags.find(t => parseInt(t.id) === parseInt(item))?.name}</Tag>
             ))
           }
         </Descriptions.Item>
@@ -103,7 +105,7 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
           {data.description}
         </Descriptions.Item>
         <Descriptions.Item label="状态">
-          {data.publish}
+          <Tag color={blogData.publish  ? 'green' : 'red'}>{blogData.publish ? '发布' : '草稿'}</Tag>
         </Descriptions.Item>
         <Descriptions.Item label="创建时间">
           {data.createTime}
