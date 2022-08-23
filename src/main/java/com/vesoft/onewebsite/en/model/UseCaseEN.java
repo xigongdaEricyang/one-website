@@ -41,6 +41,12 @@ public class UseCaseEN extends HyperModel {
     private String description;
 
     @EruptField(
+      views = @View(title = "key"),
+      edit = @Edit(title = "key", notNull = true)
+    )
+    private String key;
+
+    @EruptField(
             views = @View(title = "图片", type = ViewType.IMAGE),
             edit = @Edit(title = "图片", type = EditType.INPUT)
     )
