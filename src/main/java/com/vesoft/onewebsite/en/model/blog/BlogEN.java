@@ -60,7 +60,7 @@ public class BlogEN extends HyperModel {
             joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     @EruptField(
-            edit = @Edit(title = "Tag", type = EditType.TAB_TABLE_ADD,
+            edit = @Edit(title = "Tag", type = EditType.TAB_TREE,
                     referenceTableType = @ReferenceTableType(label = "tag"))
     )
     private Set<BlogTagEN> tags;
