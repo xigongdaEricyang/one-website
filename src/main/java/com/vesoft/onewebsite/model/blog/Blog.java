@@ -52,7 +52,7 @@ public class Blog extends HyperModel {
     )
     private String author;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(
             name = "website_blog_tag_join",
             joinColumns = @JoinColumn(name = "blog_id", referencedColumnName = "id"),
