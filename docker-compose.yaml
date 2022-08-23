@@ -32,6 +32,6 @@ services:
     environment:
       - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
       - "TZ=${MYSQL_TZ}"
-      - "MYSQL_DATABASE=onewebsite"
+      - "MYSQL_DATABASE=website"
     
 
