@@ -43,19 +43,21 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
       setCategorys(res.list)
     });
     asyncFetchBlogTags().then((res: any) => {
-      setTags(res.list)
+      const tags = res.list;
+      setTags(tags)
+      asyncFetchBlogById(data.id).then((curData: any) => {
+        // setBlogData(curData)
+        form.setFieldsValue({
+          ...curData,
+          // tags: (curData.tags || []).map((item: any) => tags.find(tag => tag.id === item.toString())),
+          tags: (curData.tags || []),
+          publish: curData?.publish === '发布' ? true : false
+        });
+      });
     });
     if (type === 'add') {
       return;
     }
-    asyncFetchBlogById(data.id).then((curData: any) => {
-      // setBlogData(curData)
-      form.setFieldsValue({
-        ...curData,
-        tags: (curData.tags || []).map((item: any) => item.name),
-        publish: curData?.publish === '发布' ? true : false
-      });
-    });
   }, [])
 
   useEffect(() => {
@@ -77,12 +79,8 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
         ...values,
         blog_category,
         tags: (values.tags || []).map(tag => {
-          const t = tags.find(t => t.name === tag);
-          if (t) {
-            t.id = parseInt(t.id);
-            return t;
-          };
-          return { name: tag }
+          const t = tags.find(t => parseInt(t.id) === parseInt(tag));
+          return { name: t.name }
         }),
         id: data ? parseInt(data.id) : undefined,
       });
@@ -226,10 +224,10 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
           </Col>
           <Col span={10}>
             <Form.Item label="标签" name="tags">
-              <Select mode="tags">
+              <Select mode="multiple">
                 {
                   tags?.map((tag: any) => (
-                    <Select.Option key={tag.name}>{tag.name}</Select.Option>
+                    <Select.Option key={tag.name} value={parseInt(tag.id)}>{tag.name}</Select.Option>
                   ))
                 }
               </Select>

@@ -26,8 +26,9 @@ import javax.persistence.Table;
 public class Feature extends HyperModel {
     @EruptField(
             views = @View(title = "简要特性"),
-            edit = @Edit(title = "简要特性", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "简要特性", search = @Search(vague = true))
     )
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @EruptField(

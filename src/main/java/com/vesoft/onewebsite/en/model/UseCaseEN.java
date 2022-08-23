@@ -13,6 +13,7 @@ import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.EruptDataSource;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -36,6 +37,7 @@ public class UseCaseEN extends HyperModel {
             views = @View(title = "描述", type=ViewType.HTML),
             edit = @Edit(title = "描述", type = EditType.HTML_EDITOR, notNull = true)
     )
+    @Column(columnDefinition = "LONGTEXT NOT NULL")
     private String description;
 
     @EruptField(
