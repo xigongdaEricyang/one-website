@@ -41,7 +41,7 @@ public class UseCase extends HyperModel {
       views = @View(title = "key"),
       edit = @Edit(title = "key")
     )
-    private String key;
+    private String usecase_key;
 
     @EruptField(
             views = @View(title = "图片", type = ViewType.IMAGE),
