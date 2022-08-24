@@ -70,7 +70,7 @@ public class ProductEN extends HyperModel {
 
     @EruptField(
             views = @View(title = "Summary"),
-            edit = @Edit(title = "Summary", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "Summary", search = @Search(vague = true))
     )
     private String summary;
 
