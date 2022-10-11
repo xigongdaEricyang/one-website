@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="$language">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://g.alicdn.com/platform/c/lodash/4.6.1/lodash.min.js"></script>
+  <script src="https://g.alicdn.com/code/lib/moment.js/2.29.1/moment-with-locales.min.js"></script>
+  <title>
+    $title
+  </title>
+##  <link rel="icon" href="/publish/favicon.ico">
+##  <link href="/publish/1.0.0/vendors.css" rel="stylesheet">
+##  <link href="/publish/1.0.0/publishManagement.css" rel="stylesheet">
+##  <script defer="defer" src="/publish/1.0.0/runtime.js"></script>
+##  <script defer="defer" src="/publish/1.0.0/vendors.js"></script>
+##  <script defer="defer" src="/publish/1.0.0/publishManagement.js"></script>
+  <script defer="defer" src="http://localhost:7000/publishManagement.js"></script>
+</head>
+
+<body>
+  <div id="app" style="height: 100%;"></div>
+</body>
+
+</html>

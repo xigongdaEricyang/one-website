@@ -10,10 +10,19 @@ import { baseConifg } from './webpack.config.base';
 
 const EDITOR_PATH = path.resolve(__dirname, "./node_modules/react-markdown-editor-lite");
 
+const folderNameMap = {
+  index: 'blog',
+  index_publish: 'publish',
+};
+
+const entryFile = process.env.ENTRY;
+
+const folderName = folderNameMap[entryFile!];
+
 const publicConfig: Configuration = {
   mode: 'production',
   output: {
-    path: path.join(__dirname, '../../src/main/resources/public/web'),
+    path: path.join(__dirname, `../../src/main/resources/public/${folderName}`),
     filename: `${packageJson.version}/[name].js`,
     chunkFilename: `${packageJson.version}/[name].js`,
     publicPath: '/web',

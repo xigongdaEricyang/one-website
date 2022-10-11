@@ -3,9 +3,13 @@ import { curLanguage, Language } from '@/utils';
 
 export const DEFAULT_PAGE_SIZE = 10;
 
+const Authorization = "Bearer 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";
+
 const getEntity = (entity: string) => {
   return curLanguage === Language.ZH_CN ? entity : `${entity}EN`;
 }
+
+const workflowBaseUrl = 'https://api.github.com/repos/vesoft-inc/nebula-website/actions/workflows';
 
 const getHost = () => {
   const { protocol, hostname } = location;
@@ -169,3 +173,47 @@ export const asyncSearchBlogList = async (data, pageIndex) => {
   )
   return res.data;
 }
+
+export const asyncFetchWorkflows = async () => {
+  const res = await axios.get(
+    workflowBaseUrl,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization,
+      }
+    }
+  )
+  if (res.status === 200) {
+    return res.data.workflows;
+  }
+  return [];
+}
+
+export const asyncTriggerPublish = async (workflowId, params) => {
+  const res = await axios.post(
+    `${workflowBaseUrl}/${workflowId}/dispatches`,
+    params,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization
+      }
+    }
+  )
+  return res;
+}
+
+export const asyncListWorkflowRuns = async (workflowId) => {
+  const res = await axios.get(
+    `${workflowBaseUrl}/${workflowId}/runs`,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization,
+      }
+    }
+  )
+  return res;
+}
+

@@ -3,14 +3,23 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const assetFileNameMap = {
+  index: 'blogManagment',
+  index_publish: 'publishManagement',
+};
+
 const isDevEnv = () => process.env.NODE_ENV === 'development';
+
+const entryFile = process.env.ENTRY;
+
+const assetsFileName = assetFileNameMap[entryFile!];
 
 const useCssPlugin = () => !isDevEnv();
 
 const baseConifg: Configuration = {
   entry: {
-    dashboard: {
-      import: path.join(__dirname, `../src/index.tsx`),
+    [assetsFileName]: {
+      import: path.join(__dirname, `../src/${entryFile}.tsx`),
     },
   },
   mode: isDevEnv() ? 'development' : 'production',

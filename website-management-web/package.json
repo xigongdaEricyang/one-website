@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.ts",
-    "build": "NODE_ENV=production webpack --config config/webpack.config.prod.ts"
+    "dev": "NODE_ENV=development ENTRY=index webpack-dev-server --config config/webpack.config.dev.ts",
+    "build": "NODE_ENV=production ENTRY=index webpack --config config/webpack.config.prod.ts",
+    "dev:publish": "NODE_ENV=development ENTRY=index_publish webpack-dev-server --config config/webpack.config.dev.ts",
+    "build:publish": "NODE_ENV=production ENTRY=index_publish webpack --config config/webpack.config.prod.ts"
   },
   "devDependencies": {
     "@alilc/lowcode-engine": "^1.0.12-beta.0",
