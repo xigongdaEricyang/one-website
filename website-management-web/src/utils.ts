@@ -4,3 +4,5 @@ export enum Language {
 }
 
 export const curLanguage = document.querySelector('html')?.lang as Language || Language.ZH_CN;
+
+export const isEn = curLanguage === Language.EN_US;

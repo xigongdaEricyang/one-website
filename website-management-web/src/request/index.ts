@@ -96,6 +96,20 @@ export const asyncFetchBlogById = async (blogId: number) => {
   };
 }
 
+export const asyncFetchBlogBySlug = async (slug: string) =>  {
+  const res = await axios.get(
+    `${getHost()}/${getWebsiteSuffix()}/blog/findBySlug`,
+    {
+      params: {
+        slug,
+      }
+    }
+    );
+  if (res.status === 200) {
+    return res.data.data;
+  }
+}
+
 export const asyncDeleteBlogById = async (id: number) => {
   const entity = getEntity('Blog');
   const res = await axios.delete(
@@ -217,3 +231,26 @@ export const asyncListWorkflowRuns = async (workflowId) => {
   return res;
 }
 
+export const asyncAutoPublishBlog = async(params: {
+  cron: string;
+  handler: string;
+  handlerParam: string;
+  name: string;
+  notifyEmails?: string;
+  status: boolean
+}) => {
+  const res = await axios.post(
+    `/erupt-api/data/modify/EruptJob`,
+    params,
+    {
+      headers: {
+        token: (parent as any).getAppToken().token,
+        erupt: 'EruptJob'
+      },
+    });
+
+  if (res.status === 200) {
+    return res.data;
+  }
+  return res;
+}

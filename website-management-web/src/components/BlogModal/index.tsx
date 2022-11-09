@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Form, Input, message, Modal, Radio, Row, Select } from 'antd';
+import { Col, DatePicker, Form, Input, message, Modal, Radio, Row, Select } from 'antd';
+import dayjs from 'dayjs';
+import moment from 'moment';
+import { useForm } from 'antd/lib/form/Form';
 
 import ModalWrapper from '@/components/ModalWrapper';
-import styles from './index.module.less';
-import { useForm } from 'antd/lib/form/Form';
 import MarkdownEditor from '../MarkdownEditor';
-import { asyncCreateBlog, asyncEditBlog, asyncFetchBlogById, asyncFetchBlogCategorys, asyncFetchBlogTags } from '@/request';
+import { asyncAutoPublishBlog, asyncCreateBlog, asyncEditBlog, asyncFetchBlogById, asyncFetchBlogBySlug, asyncFetchBlogCategorys, asyncFetchBlogTags } from '@/request';
+import { isEn } from '@/utils';
+import styles from './index.module.less';
 
 interface IProps {
   visible?: boolean;
@@ -32,7 +35,12 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
 
   const [categorys, setCategorys] = useState([]);
 
-  // const [ blogData, setBlogData ] = useState(data);
+  const [curPublishStatus, setCurPublishStatus] = useState(false);
+
+  const [notifyEmails, setNotifyEmails] = useState([]);
+
+  // timing task info
+  const [timedInfo, setTimedInfo] = useState<any>({});
 
   const [tags, setTags] = useState<any>([]);
 
@@ -51,14 +59,21 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
           ...curData,
           // tags: (curData.tags || []).map((item: any) => tags.find(tag => tag.id === item.toString())),
           tags: (curData.tags || []),
-          publish: curData?.publish === '发布' ? true : false
+          publish: curData?.publish
         });
+        setCurPublishStatus(curData?.publish)
       });
     });
     if (type === 'add') {
       return;
     }
   }, [])
+
+  useEffect(() => {
+    if (curPublishStatus) {
+      setTimedInfo({});
+    }
+  }, [curPublishStatus])
 
   useEffect(() => {
     if (!curVisible) {
@@ -88,14 +103,81 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
         }),
         id: data ? parseInt(data.id) : undefined,
       });
+      asyncAfterBlogBuild(type, values);
       onOk?.(res);
       setLoading(false);
       setCurVisible(false);
     })
   };
 
+  const asyncAfterBlogBuild = async (type: string, values: any) => {
+    if (values.publish) return;
+    let blog_id;
+    if (type === 'add') {
+      const data = await asyncFetchBlogBySlug(values.slug);
+      blog_id = data.id;
+    } else if (type === 'edit') {
+      blog_id = data.id;
+    }
+    const { year, month, day, hour, minute, second } = timedInfo;
+    if (year && month && day && hour && minute && second) {
+      const res = await asyncAutoPublishBlog({
+        cron: `${second} ${minute} ${hour} ${day} ${month} ? ${year}`,
+        handler: 'com.vesoft.onewebsite.handler.BlogJobHandler',
+        handlerParam: JSON.stringify({ id: blog_id, isEn }),
+        name: `文章《${values.title}》定时发布`,
+        notifyEmails: notifyEmails.length ? notifyEmails.join(',') : undefined,
+        status: true,
+      })
+      if (res.message === 'SUCCESS') {
+        message.success('定时任务创建成功');
+      }
+    }
+  }
+
 
   const [form] = useForm();
+
+  const handlePublishChange = (e: any) => {
+    setCurPublishStatus(e.target.value);
+  }
+
+  const handleDatePickerChange = (date: any) => {
+    const formatDate = dayjs(date).format('YYYY-M-D H:m:s');
+    const [d, time] = formatDate.split(' ');
+    const [year, month, day] = d.split('-');
+    const [hour, minute, second] = time.split(':');
+    setTimedInfo({
+      ...timedInfo,
+      year,
+      month,
+      day,
+      hour,
+      minute,
+      second,
+    })
+  }
+
+  const disabledDate = current => {
+    return current && current < moment(new Date()).subtract(1, 'day');
+  };
+
+  const range = (start: number, end: number) => {
+    const result: any = [];
+    for (let i = start; i < end; i++) {
+      result.push(i);
+    }
+    return result;
+  };
+
+  const disabledDateTime = () => ({
+    disabledHours: () => range(0, 24).splice(0, moment().hour()),
+    disabledMinutes: () => range(0, 24).splice(0, moment().minute()),
+  });
+
+  const handleMailsChange = (e) => {
+    setNotifyEmails(e);
+  }
 
   return (
     <Modal
@@ -186,7 +268,7 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
                 },
               ]}
             >
-              <Radio.Group>
+              <Radio.Group onChange={handlePublishChange}>
                 <Radio value={true}>发布</Radio>
                 <Radio value={false}>草稿</Radio>
               </Radio.Group>
@@ -248,7 +330,40 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
             </Form.Item>
           </Col>
         </Row>
-
+        {
+          curPublishStatus === false && (
+            <Row>
+              <Col span={10}>
+                <Form.Item
+                  label="定时发布"
+                  labelCol={{ span: 0 }}
+                  wrapperCol={{ span: 16 }}
+                >
+                  <DatePicker
+                    showTime
+                    onChange={handleDatePickerChange}
+                    format="YYYY-MM-DD HH:mm:ss"
+                    disabledDate={disabledDate}
+                    disabledTime={disabledDateTime}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={10}>
+                <Form.Item
+                  label="失败通知邮箱"
+                  labelCol={{ span: 0 }}
+                  wrapperCol={{ span: 16 }}
+                >
+                  <Select
+                    mode="tags"
+                    onChange={handleMailsChange}
+                    tokenSeparators={[',']}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          )
+        }
       </Form>
     </Modal>
   );

@@ -11,11 +11,11 @@
     $title
   </title>
   <link rel="icon" href="/blog/favicon.ico">
-  <link href="/blog/1.0.0/vendors.css" rel="stylesheet">
-  <link href="/blog/1.0.0/blogManagement.css" rel="stylesheet">
-  <script defer="defer" src="/blog/1.0.0/runtime.js"></script>
-  <script defer="defer" src="/blog/1.0.0/vendors.js"></script>
-  <script defer="defer" src="/blog/1.0.0/blogManagement.js"></script>
+  <link href="/blog/1.1.0/vendors.css" rel="stylesheet">
+  <link href="/blog/1.1.0/blogManagement.css" rel="stylesheet">
+  <script defer="defer" src="/blog/1.1.0/runtime.js"></script>
+  <script defer="defer" src="/blog/1.1.0/vendors.js"></script>
+  <script defer="defer" src="/blog/1.1.0/blogManagement.js"></script>
 
 ##  <script defer="defer" src="http://localhost:7000/blogManagement.js"></script>
 </head>

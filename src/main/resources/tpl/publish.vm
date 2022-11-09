@@ -10,13 +10,13 @@
   <title>
     $title
   </title>
-##  <link rel="icon" href="/publish/favicon.ico">
-##  <link href="/publish/1.0.0/vendors.css" rel="stylesheet">
-##  <link href="/publish/1.0.0/publishManagement.css" rel="stylesheet">
-##  <script defer="defer" src="/publish/1.0.0/runtime.js"></script>
-##  <script defer="defer" src="/publish/1.0.0/vendors.js"></script>
-##  <script defer="defer" src="/publish/1.0.0/publishManagement.js"></script>
-  <script defer="defer" src="http://localhost:7000/publishManagement.js"></script>
+  <link rel="icon" href="/publish/favicon.ico">
+  <link href="/publish/1.0.0/vendors.css" rel="stylesheet">
+  <link href="/publish/1.0.0/publishManagement.css" rel="stylesheet">
+  <script defer="defer" src="/publish/1.0.0/runtime.js"></script>
+  <script defer="defer" src="/publish/1.0.0/vendors.js"></script>
+  <script defer="defer" src="/publish/1.0.0/publishManagement.js"></script>
+##  <script defer="defer" src="http://localhost:7000/publishManagement.js"></script>
 </head>
 
 <body>
