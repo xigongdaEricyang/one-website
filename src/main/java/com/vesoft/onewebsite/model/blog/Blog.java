@@ -82,6 +82,13 @@ public class Blog extends HyperModel {
     )
     private Boolean publish;
 
+    @EruptField(
+            views = @View(title= "发布时间"),
+            edit = @Edit(title = "发布时间", notNull = false, search = @Search)
+    )
+    @Column(name = "publish_time")
+    private Date publishTime;
+
     @Lob
     @EruptField(
             views = @View(title = "内容", type = ViewType.TEXT, export = false),

@@ -8,6 +8,7 @@ import styles from './index.module.less';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import BlogViewModal from '@/components/BlogViewModal';
 import { useForm } from 'antd/lib/form/Form';
+import { formatDay } from '@/utils';
 
 
 const BlogManagement = () => {
@@ -135,15 +136,24 @@ const BlogManagement = () => {
       },
       {
         key: 'createTime',
+        title: '发布时间',
+        dataIndex: 'publishTime',
+        width: 150,
+        render: (publishTime) => publishTime ? formatDay(publishTime) : ''
+      },
+      {
+        key: 'createTime',
         title: '创建时间',
         dataIndex: 'createTime',
-        width: 150
+        width: 150,
+        render: (createTime) => createTime ? formatDay(createTime) : ''
       },
       {
         key: 'updateTime',
         title: '修改时间',
         dataIndex: 'updateTime',
-        width: 150
+        width: 150,
+        render: (updateTime) => updateTime ? formatDay(updateTime) : ''
       },
       {
         key: 'action',

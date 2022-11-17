@@ -14,7 +14,7 @@ const workflowBaseUrl = 'https://api.github.com/repos/vesoft-inc/nebula-website/
 const getHost = () => {
   const { protocol, hostname } = location;
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://192.168.8.116'
+    return 'http://192.168.8.116:8080'
   }
   let curProtocol = protocol.includes('https') ? 'https' : 'http';
   return `${curProtocol}://${hostname}`;

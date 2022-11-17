@@ -57,7 +57,7 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
         // setBlogData(curData)
         form.setFieldsValue({
           ...curData,
-          // tags: (curData.tags || []).map((item: any) => tags.find(tag => tag.id === item.toString())),
+          publishTime: curData.publishTime ? moment(curData.publishTime) : undefined,
           tags: (curData.tags || []),
           publish: curData?.publish
         });
@@ -308,8 +308,8 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={10}>
-            <Form.Item label="标签" name="tags">
+          <Col span={8}>
+            <Form.Item labelCol={{ span: 5 }} wrapperCol={{ span: 18 }} label="标签" name="tags">
               <Select mode="multiple">
                 {
                   tags?.map((tag: any) => (
@@ -317,6 +317,19 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
                   ))
                 }
               </Select>
+            </Form.Item>
+          </Col>
+          <Col span={9}>
+            <Form.Item
+              label="发布时间"
+              labelCol={{ span: 5 }}
+              wrapperCol={{ span: 20 }} name="publishTime">
+              <DatePicker
+                showTime
+                format="YYYY-MM-DD HH:mm:ss"
+                disabledDate={disabledDate}
+                disabledTime={disabledDateTime}
+              />
             </Form.Item>
           </Col>
         </Row>

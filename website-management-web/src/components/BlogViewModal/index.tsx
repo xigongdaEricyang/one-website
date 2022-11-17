@@ -6,6 +6,7 @@ import styles from './index.module.less';
 import { useForm } from 'antd/lib/form/Form';
 import MarkdownEditor from '../MarkdownEditor';
 import { asyncFetchBlogById, asyncFetchBlogTags } from '@/request';
+import { formatDay } from '@/utils';
 // import { asyncCreateBlog } from '@/request';
 
 interface IProps {
@@ -108,10 +109,13 @@ const BlogViewModal: React.FC<IProps> = (props: IProps) => {
           <Tag color={blogData.publish  ? 'green' : 'red'}>{blogData.publish ? '发布' : '草稿'}</Tag>
         </Descriptions.Item>
         <Descriptions.Item label="创建时间">
-          {data.createTime}
+          {data.createTime ? formatDay(data.createTime) : ''}
         </Descriptions.Item>
         <Descriptions.Item label="更新时间">
-          {data.updateTime}
+          {data.updateTime ? formatDay(data.updateTime) : ''}
+        </Descriptions.Item>
+        <Descriptions.Item label="发布时间">
+          {data.publishTime ? formatDay(data.publishTime) : '未发布'}
         </Descriptions.Item>
       </Descriptions>
       <div className={styles.content}>

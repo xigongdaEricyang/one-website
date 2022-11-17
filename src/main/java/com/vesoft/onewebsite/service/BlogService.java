@@ -36,8 +36,10 @@ public class BlogService {
             return null;
         }
         if (blog.getPublish() == false) {
+            Date now = new Date();
             blog.setPublish(true);
-            blog.setUpdateTime(new Date());
+            blog.setUpdateTime(now);
+            blog.setPublishTime(now);
             eruptDao.getEntityManager().merge(blog);
         }
         return blog;
@@ -50,8 +52,10 @@ public class BlogService {
             return null;
         }
         if (blogen.getPublish() == false) {
+            Date now = new Date();
             blogen.setPublish(true);
-            blogen.setUpdateTime(new Date());
+            blogen.setUpdateTime(now);
+            blogen.setPublishTime(now);
             entityManager.merge(blogen);
         }
         entityManager.close();
