@@ -327,8 +327,8 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
               <DatePicker
                 showTime
                 format="YYYY-MM-DD HH:mm:ss"
-                disabledDate={disabledDate}
-                disabledTime={disabledDateTime}
+                // disabledDate={disabledDate}
+                // disabledTime={disabledDateTime}
               />
             </Form.Item>
           </Col>

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.vesoft</groupId>
 	<artifactId>one-website</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>one-website</name>
 	<description>vesoft one website backend management</description>
 	<properties>

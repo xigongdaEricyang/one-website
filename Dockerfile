@@ -11,7 +11,7 @@
 #
 FROM openjdk:8-alpine
 RUN apk --update add --no-cache fontconfig ttf-dejavu
-COPY one-website-0.0.3-SNAPSHOT.jar /usr/local/lib/one-website.jar
+COPY one-website-0.0.4-SNAPSHOT.jar /usr/local/lib/one-website.jar
 # COPY --from=build ./one-website-0.0.2-SNAPSHOT.jar /usr/local/lib/one-website.jar
 COPY src/main/resources/application.yml /usr/local/lib/application.yml
 
