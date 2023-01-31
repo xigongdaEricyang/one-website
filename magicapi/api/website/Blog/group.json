@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "96a0eee7dd8f4da2a65a69307c3ac4d9",
+  "name" : "Blog",
+  "type" : "api",
+  "parentId" : "91dd0e26610f4cfeac3b69791ea4d13d",
+  "path" : "/blog",
+  "createTime" : 1658307916104,
+  "updateTime" : 1658902522840,
+  "createBy" : "admin",
+  "updateBy" : "admin",
+  "paths" : [ ],
+  "options" : [ ]
+}

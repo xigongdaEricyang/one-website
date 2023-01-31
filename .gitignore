@@ -39,3 +39,4 @@ logs/
 magic-scripts/
 attachments/
 *.jar
+src/main/public/*

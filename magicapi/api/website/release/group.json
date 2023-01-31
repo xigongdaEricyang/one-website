@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "5b9c536748404ffabb2f5a44b3958829",
+  "name" : "release",
+  "type" : "api",
+  "parentId" : "91dd0e26610f4cfeac3b69791ea4d13d",
+  "path" : "/release",
+  "createTime" : 1659584437030,
+  "updateTime" : null,
+  "createBy" : "admin",
+  "updateBy" : null,
+  "paths" : [ ],
+  "options" : [ ]
+}
