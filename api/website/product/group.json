@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "030e589d0efb4a70b62a3b91dc87c2d1",
+  "name" : "product",
+  "type" : "api",
+  "parentId" : "91dd0e26610f4cfeac3b69791ea4d13d",
+  "path" : "/product",
+  "createTime" : null,
+  "updateTime" : 1658902401610,
+  "createBy" : null,
+  "updateBy" : "admin",
+  "paths" : [ ],
+  "options" : [ ]
+}

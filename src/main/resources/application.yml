@@ -30,7 +30,7 @@ magic-api:
   web: /magic/web
 # need to replace
 #  resource.location: /Users/rivery/Desktop/projects/new-website/magic-scripts
-  resource.location: /opt/metadata/magic-api
+  resource.location: ${MAGIC_LOCATION_PATH:/opt/metadata/magic-api}
   show-url: false
   show-sql: true #配置打印SQL
   response-code:

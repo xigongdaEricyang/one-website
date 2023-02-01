@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "e4d3e7deee6d42e688a77172fe976b8a",
+  "name" : "usecase",
+  "type" : "api",
+  "parentId" : "91dd0e26610f4cfeac3b69791ea4d13d",
+  "path" : "/usecase",
+  "createTime" : 1658906638027,
+  "updateTime" : null,
+  "createBy" : "admin",
+  "updateBy" : null,
+  "paths" : [ ],
+  "options" : [ ]
+}
