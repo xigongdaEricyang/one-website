@@ -6,6 +6,8 @@ export const DEFAULT_PAGE_SIZE = 10;
 const Authorization = "Bearer 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";
 
 const getEntity = (entity: string) => {
+  // @ts-ignore
+  if (window.PLATFORM === 'yueshu') return `${entity}Yueshu`;
   return curLanguage === Language.ZH_CN ? entity : `${entity}EN`;
 }
 
@@ -21,6 +23,8 @@ const getHost = () => {
 }
 
 const getWebsiteSuffix = () => {
+  // @ts-ignore
+  if (window.PLATFORM === 'yueshu') return `website_yueshu`;
   return curLanguage === Language.ZH_CN ? 'website' : 'website_en'
 }
 
@@ -60,14 +64,14 @@ export const asyncEditBlog = async (data) => {
 
 export const asyncFetchBlogs = async (pageIndex: number) => {
   const res = await axios.get(
-    `${getHost()}/${getWebsiteSuffix()}/blog/list`,
+    `/${getWebsiteSuffix()}/blog/list`,
     {
       params: {
         page: pageIndex,
         pageSize: DEFAULT_PAGE_SIZE,
       }
     }
-    );
+  );
   if (res.status === 200) {
     return res.data.data;
   }
@@ -96,15 +100,15 @@ export const asyncFetchBlogById = async (blogId: number) => {
   };
 }
 
-export const asyncFetchBlogBySlug = async (slug: string) =>  {
+export const asyncFetchBlogBySlug = async (slug: string) => {
   const res = await axios.get(
-    `${getHost()}/${getWebsiteSuffix()}/blog/findBySlug`,
+    `/${getWebsiteSuffix()}/blog/findBySlug`,
     {
       params: {
         slug,
       }
     }
-    );
+  );
   if (res.status === 200) {
     return res.data.data;
   }
@@ -176,7 +180,7 @@ export const asyncFetchBlogTags = async () => {
 
 export const asyncSearchBlogList = async (data, pageIndex) => {
   const res = await axios.get(
-    `${getHost()}/${getWebsiteSuffix()}/blog/list`,
+    `/${getWebsiteSuffix()}/blog/list`,
     {
       params: {
         page: pageIndex,
@@ -231,7 +235,7 @@ export const asyncListWorkflowRuns = async (workflowId) => {
   return res;
 }
 
-export const asyncAutoPublishBlog = async(params: {
+export const asyncAutoPublishBlog = async (params: {
   cron: string;
   handler: string;
   handlerParam: string;

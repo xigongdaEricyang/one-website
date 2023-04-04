@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "41effd1b089f433686b8f4242d4247ac",
+  "name" : "partner",
+  "type" : "api",
+  "parentId" : "6d5ea155b06c4f21968ef91893c63173",
+  "path" : "/partner",
+  "createTime" : 1680574339001,
+  "updateTime" : 1680574393483,
+  "createBy" : "admin",
+  "updateBy" : "admin",
+  "paths" : [ ],
+  "options" : [ ]
+}

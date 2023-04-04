@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "6d5ea155b06c4f21968ef91893c63173",
+  "name" : "website_yueshu",
+  "type" : "api",
+  "parentId" : "0",
+  "path" : "/website_yueshu",
+  "createTime" : 1680507483362,
+  "updateTime" : 1680507498137,
+  "createBy" : "admin",
+  "updateBy" : "admin",
+  "paths" : [ ],
+  "options" : [ ]
+}

@@ -11,3 +11,4 @@ export MYSQL_EN_TZ=America/New_York
 export MAGIC_LOCATION_PATH=./
 
 nohup java -jar ./target/one-website-0.0.4-SNAPSHOT.jar --spring.config.location=./src/main/resources/application.yml > ./logs/cms.log 2>&1 &
+# java -jar ./target/one-website-0.0.4-SNAPSHOT.jar --spring.config.location=./src/main/resources/application.yml 
