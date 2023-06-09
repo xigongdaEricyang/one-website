@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "eb122e334a3b48d2840deb8a282bbc7a",
+  "name" : "company",
+  "type" : "api",
+  "parentId" : "6d5ea155b06c4f21968ef91893c63173",
+  "path" : "/company",
+  "createTime" : 1680574332840,
+  "updateTime" : 1680574383542,
+  "createBy" : "admin",
+  "updateBy" : "admin",
+  "paths" : [ ],
+  "options" : [ ]
+}
