@@ -110,6 +110,12 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
     })
   };
 
+  const getPlatform = () => {
+    const platform = (window as any).PLATFORM || '';
+    if (platform !== '') return platform;
+    return isEn ? 'nebula_EN' : 'nebula_CN';
+  }
+
   const asyncAfterBlogBuild = async (type: string, values: any) => {
     if (values.publish) return;
     let blog_id;
@@ -124,7 +130,7 @@ const BlogModal: React.FC<IProps> = (props: IProps) => {
       const res = await asyncAutoPublishBlog({
         cron: `${second} ${minute} ${hour} ${day} ${month} ? ${year}`,
         handler: 'com.vesoft.onewebsite.handler.BlogJobHandler',
-        handlerParam: JSON.stringify({ id: blog_id, isEn }),
+        handlerParam: JSON.stringify({ id: blog_id, isEn, platform: getPlatform() }),
         name: `文章《${values.title}》定时发布`,
         notifyEmails: notifyEmails.length ? notifyEmails.join(',') : undefined,
         status: true,

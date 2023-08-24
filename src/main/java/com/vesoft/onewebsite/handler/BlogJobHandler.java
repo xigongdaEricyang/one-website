@@ -3,6 +3,7 @@ package com.vesoft.onewebsite.handler;
 import com.alibaba.fastjson2.JSONObject;
 import com.vesoft.onewebsite.en.model.blog.BlogEN;
 import com.vesoft.onewebsite.model.blog.Blog;
+import com.vesoft.onewebsite.model.yueshu.blog.BlogYueshu;
 import com.vesoft.onewebsite.service.BlogService;
 import org.quartz.SchedulerException;
 import org.slf4j.Logger;
@@ -29,9 +30,17 @@ public class BlogJobHandler implements EruptJobHandler {
         JSONObject obj = JSONObject.parseObject(param);
         Long blog_id = obj.getLongValue("id");
         Boolean isEn = obj.getBoolean("isEn");
-        logger.info("博客定时发布任务已经执行，执行文章id:{}",blog_id);
+        String platform = obj.getString("platform");
+        logger.info("博客定时发布任务已经执行，执行文章id:{}, 发布平台为: {}",blog_id, platform);
         String result;
-        if (isEn == null || isEn == false) {
+        if (platform == "yueshu") {
+          BlogYueshu blog = blogService.publishBlogYueShuById(blog_id);
+            if (blog == null) {
+                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog.getTitle();
+            } else {
+                result = "博客定时发布执行成功，执行文章标题为: " + blog.getTitle();
+            }
+        } else if (isEn == null || isEn == false) {
             Blog blog = blogService.publishBlogById(blog_id);
             if (blog == null) {
                 result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog.getTitle();
