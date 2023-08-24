@@ -2,6 +2,8 @@ package com.vesoft.onewebsite.service;
 
 import com.vesoft.onewebsite.en.model.blog.BlogEN;
 import com.vesoft.onewebsite.model.blog.Blog;
+import com.vesoft.onewebsite.model.yueshu.blog.BlogYueshu;
+
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
 import xyz.erupt.job.config.EruptJobProp;
@@ -20,55 +22,71 @@ import java.util.Date;
 @Transactional
 public class BlogService {
 
-    @Resource
-    private EruptDao eruptDao;
+  @Resource
+  private EruptDao eruptDao;
 
+  @Resource
+  private EruptJobService eruptJobService;
 
-    @Resource
-    private EruptJobService eruptJobService;
+  @Resource
+  private EruptJobProp eruptJobProp;
 
-    @Resource
-    private EruptJobProp eruptJobProp;
-
-    public Blog publishBlogById(Long blogId) {
-        Blog blog = eruptDao.getEntityManager().find(Blog.class, blogId);
-        if (blog == null) {
-            return null;
-        }
-        if (blog.getPublish() == false) {
-            Date now = new Date();
-            blog.setPublish(true);
-            blog.setUpdateTime(now);
-            blog.setPublishTime(now);
-            eruptDao.getEntityManager().merge(blog);
-        }
-        return blog;
+  public Blog publishBlogById(Long blogId) {
+    Blog blog = eruptDao.getEntityManager().find(Blog.class, blogId);
+    if (blog == null) {
+      return null;
     }
-
-    public BlogEN publishBlogENById(Long blogId) {
-        EntityManager entityManager = eruptDao.getEntityManager("english_datasource");
-        BlogEN blogen = entityManager.find(BlogEN.class, blogId);
-        if (blogen == null) {
-            return null;
-        }
-        if (blogen.getPublish() == false) {
-            Date now = new Date();
-            blogen.setPublish(true);
-            blogen.setUpdateTime(now);
-            blogen.setPublishTime(now);
-            entityManager.merge(blogen);
-        }
-        entityManager.close();
-        return blogen;
+    if (blog.getPublish() == false) {
+      Date now = new Date();
+      blog.setPublish(true);
+      blog.setUpdateTime(now);
+      blog.setPublishTime(now);
+      eruptDao.getEntityManager().merge(blog);
     }
+    return blog;
+  }
 
-    public void bidJobSchedule(String code) throws SchedulerException, ParseException {
-        if (eruptJobProp.isEnable()) {
-            String expr = "code = '" + code + "'";
-            EruptJob job =  eruptDao.queryEntity(EruptJob.class, expr);
-            job.setStatus(false);
-            job.setUpdateTime(LocalDateTime.now());
-            eruptJobService.modifyJob(job);
-        }
+  public BlogEN publishBlogENById(Long blogId) {
+    EntityManager entityManager = eruptDao.getEntityManager("english_datasource");
+    BlogEN blogen = entityManager.find(BlogEN.class, blogId);
+    if (blogen == null) {
+      return null;
     }
+    if (blogen.getPublish() == false) {
+      Date now = new Date();
+      blogen.setPublish(true);
+      blogen.setUpdateTime(now);
+      blogen.setPublishTime(now);
+      entityManager.merge(blogen);
+    }
+    entityManager.close();
+    return blogen;
+  }
+
+  public BlogYueshu publishBlogYueShuById(Long blogId) {
+    EntityManager entityManager = eruptDao.getEntityManager();
+    BlogYueshu blog_yueshu = entityManager.find(BlogYueshu.class, blogId);
+    if (blog_yueshu == null) {
+      return null;
+    }
+    if (blog_yueshu.getPublish() == false) {
+      Date now = new Date();
+      blog_yueshu.setPublish(true);
+      blog_yueshu.setUpdateTime(now);
+      blog_yueshu.setPublishTime(now);
+      entityManager.merge(blog_yueshu);
+    }
+    entityManager.close();
+    return blog_yueshu;
+  }
+
+  public void bidJobSchedule(String code) throws SchedulerException, ParseException {
+    if (eruptJobProp.isEnable()) {
+      String expr = "code = '" + code + "'";
+      EruptJob job = eruptDao.queryEntity(EruptJob.class, expr);
+      job.setStatus(false);
+      job.setUpdateTime(LocalDateTime.now());
+      eruptJobService.modifyJob(job);
+    }
+  }
 }
