@@ -33,24 +33,24 @@ public class BlogJobHandler implements EruptJobHandler {
         String platform = obj.getString("platform");
         logger.info("博客定时发布任务已经执行，执行文章id:{}, 发布平台为: {}",blog_id, platform);
         String result;
-        if (platform == "yueshu") {
+        if (platform.equals("yueshu")) {
           BlogYueshu blog = blogService.publishBlogYueShuById(blog_id);
             if (blog == null) {
-                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog.getTitle();
+                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog_id;
             } else {
                 result = "博客定时发布执行成功，执行文章标题为: " + blog.getTitle();
             }
         } else if (isEn == null || isEn == false) {
             Blog blog = blogService.publishBlogById(blog_id);
             if (blog == null) {
-                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog.getTitle();
+                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog_id;
             } else {
                 result = "博客定时发布执行成功，执行文章标题为: " + blog.getTitle();
             }
         } else {
             BlogEN blog = blogService.publishBlogENById(blog_id);
             if (blog == null) {
-                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog.getTitle();
+                result = "博客定时发布执行失败，待执行文章不存在，id为: " + blog_id;
             } else {
                 result = "博客定时发布执行成功，执行文章标题为: " + blog.getTitle();
             }

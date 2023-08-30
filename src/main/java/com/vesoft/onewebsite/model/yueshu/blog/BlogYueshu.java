@@ -12,7 +12,6 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.core.annotation.EruptDataSource;
 
 import javax.persistence.*;
 import java.util.Date;
