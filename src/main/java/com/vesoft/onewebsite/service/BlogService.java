@@ -64,20 +64,18 @@ public class BlogService {
   }
 
   public BlogYueshu publishBlogYueShuById(Long blogId) {
-    EntityManager entityManager = eruptDao.getEntityManager();
-    BlogYueshu blog_yueshu = entityManager.find(BlogYueshu.class, blogId);
-    if (blog_yueshu == null) {
+    BlogYueshu blog = eruptDao.getEntityManager().find(BlogYueshu.class, blogId);
+    if (blog == null) {
       return null;
     }
-    if (blog_yueshu.getPublish() == false) {
+    if (blog.getPublish() == false) {
       Date now = new Date();
-      blog_yueshu.setPublish(true);
-      blog_yueshu.setUpdateTime(now);
-      blog_yueshu.setPublishTime(now);
-      entityManager.merge(blog_yueshu);
+      blog.setPublish(true);
+      blog.setUpdateTime(now);
+      blog.setPublishTime(now);
+      eruptDao.getEntityManager().merge(blog);
     }
-    entityManager.close();
-    return blog_yueshu;
+    return blog;
   }
 
   public void bidJobSchedule(String code) throws SchedulerException, ParseException {
